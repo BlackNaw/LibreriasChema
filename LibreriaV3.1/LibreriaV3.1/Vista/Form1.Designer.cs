@@ -88,7 +88,7 @@
             this.txtMensaje.Enabled = false;
             this.txtMensaje.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMensaje.Location = new System.Drawing.Point(380, 48);
-            this.txtMensaje.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtMensaje.Margin = new System.Windows.Forms.Padding(2);
             this.txtMensaje.Name = "txtMensaje";
             this.txtMensaje.Size = new System.Drawing.Size(232, 26);
             this.txtMensaje.TabIndex = 2;
@@ -97,7 +97,7 @@
             // 
             this.txtTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTitulo.Location = new System.Drawing.Point(92, 94);
-            this.txtTitulo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtTitulo.Margin = new System.Windows.Forms.Padding(2);
             this.txtTitulo.Name = "txtTitulo";
             this.txtTitulo.Size = new System.Drawing.Size(242, 26);
             this.txtTitulo.TabIndex = 4;
@@ -117,7 +117,7 @@
             // 
             this.txtAutor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAutor.Location = new System.Drawing.Point(92, 124);
-            this.txtAutor.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtAutor.Margin = new System.Windows.Forms.Padding(2);
             this.txtAutor.Name = "txtAutor";
             this.txtAutor.Size = new System.Drawing.Size(242, 26);
             this.txtAutor.TabIndex = 6;
@@ -137,7 +137,7 @@
             // 
             this.txtPrecio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPrecio.Location = new System.Drawing.Point(92, 211);
-            this.txtPrecio.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPrecio.Margin = new System.Windows.Forms.Padding(2);
             this.txtPrecio.Name = "txtPrecio";
             this.txtPrecio.Size = new System.Drawing.Size(242, 26);
             this.txtPrecio.TabIndex = 8;
@@ -157,7 +157,7 @@
             // 
             this.txtPaginas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPaginas.Location = new System.Drawing.Point(92, 182);
-            this.txtPaginas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPaginas.Margin = new System.Windows.Forms.Padding(2);
             this.txtPaginas.Name = "txtPaginas";
             this.txtPaginas.Size = new System.Drawing.Size(242, 26);
             this.txtPaginas.TabIndex = 10;
@@ -189,7 +189,7 @@
             this.cbxTemas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbxTemas.FormattingEnabled = true;
             this.cbxTemas.Location = new System.Drawing.Point(92, 153);
-            this.cbxTemas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbxTemas.Margin = new System.Windows.Forms.Padding(2);
             this.cbxTemas.Name = "cbxTemas";
             this.cbxTemas.Size = new System.Drawing.Size(242, 28);
             this.cbxTemas.TabIndex = 12;
@@ -201,9 +201,9 @@
             this.Formato.Controls.Add(this.chkCartone);
             this.Formato.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Formato.Location = new System.Drawing.Point(30, 262);
-            this.Formato.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Formato.Margin = new System.Windows.Forms.Padding(2);
             this.Formato.Name = "Formato";
-            this.Formato.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Formato.Padding = new System.Windows.Forms.Padding(2);
             this.Formato.Size = new System.Drawing.Size(128, 128);
             this.Formato.TabIndex = 13;
             this.Formato.TabStop = false;
@@ -214,7 +214,7 @@
             this.chkTapaDura.AutoSize = true;
             this.chkTapaDura.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chkTapaDura.Location = new System.Drawing.Point(11, 89);
-            this.chkTapaDura.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkTapaDura.Margin = new System.Windows.Forms.Padding(2);
             this.chkTapaDura.Name = "chkTapaDura";
             this.chkTapaDura.Size = new System.Drawing.Size(109, 24);
             this.chkTapaDura.TabIndex = 2;
@@ -226,7 +226,7 @@
             this.chkRustica.AutoSize = true;
             this.chkRustica.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chkRustica.Location = new System.Drawing.Point(11, 60);
-            this.chkRustica.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkRustica.Margin = new System.Windows.Forms.Padding(2);
             this.chkRustica.Name = "chkRustica";
             this.chkRustica.Size = new System.Drawing.Size(89, 24);
             this.chkRustica.TabIndex = 1;
@@ -238,7 +238,7 @@
             this.chkCartone.AutoSize = true;
             this.chkCartone.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chkCartone.Location = new System.Drawing.Point(11, 32);
-            this.chkCartone.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkCartone.Margin = new System.Windows.Forms.Padding(2);
             this.chkCartone.Name = "chkCartone";
             this.chkCartone.Size = new System.Drawing.Size(92, 24);
             this.chkCartone.TabIndex = 0;
@@ -251,9 +251,9 @@
             this.Estado.Controls.Add(this.rbNovedad);
             this.Estado.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Estado.Location = new System.Drawing.Point(186, 261);
-            this.Estado.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Estado.Margin = new System.Windows.Forms.Padding(2);
             this.Estado.Name = "Estado";
-            this.Estado.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Estado.Padding = new System.Windows.Forms.Padding(2);
             this.Estado.Size = new System.Drawing.Size(120, 114);
             this.Estado.TabIndex = 14;
             this.Estado.TabStop = false;
@@ -263,7 +263,7 @@
             // 
             this.rbReedicion.AutoSize = true;
             this.rbReedicion.Location = new System.Drawing.Point(4, 61);
-            this.rbReedicion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbReedicion.Margin = new System.Windows.Forms.Padding(2);
             this.rbReedicion.Name = "rbReedicion";
             this.rbReedicion.Size = new System.Drawing.Size(107, 24);
             this.rbReedicion.TabIndex = 1;
@@ -277,7 +277,7 @@
             this.rbNovedad.Checked = true;
             this.rbNovedad.Cursor = System.Windows.Forms.Cursors.Hand;
             this.rbNovedad.Location = new System.Drawing.Point(4, 33);
-            this.rbNovedad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbNovedad.Margin = new System.Windows.Forms.Padding(2);
             this.rbNovedad.Name = "rbNovedad";
             this.rbNovedad.Size = new System.Drawing.Size(97, 24);
             this.rbNovedad.TabIndex = 0;
@@ -289,7 +289,7 @@
             // 
             this.lstLibros.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstLibros.Location = new System.Drawing.Point(380, 94);
-            this.lstLibros.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.lstLibros.Margin = new System.Windows.Forms.Padding(2);
             this.lstLibros.Name = "lstLibros";
             this.lstLibros.Size = new System.Drawing.Size(232, 435);
             this.lstLibros.TabIndex = 15;
@@ -304,7 +304,7 @@
             this.panel1.Controls.Add(this.btnNuevo);
             this.panel1.Controls.Add(this.btnAlta);
             this.panel1.Location = new System.Drawing.Point(96, 396);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(184, 132);
             this.panel1.TabIndex = 16;
@@ -313,7 +313,7 @@
             // 
             this.btnSalir.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSalir.Location = new System.Drawing.Point(8, 85);
-            this.btnSalir.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSalir.Margin = new System.Windows.Forms.Padding(2);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(162, 30);
             this.btnSalir.TabIndex = 4;
@@ -324,7 +324,7 @@
             // 
             this.btnModificar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnModificar.Location = new System.Drawing.Point(92, 50);
-            this.btnModificar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnModificar.Margin = new System.Windows.Forms.Padding(2);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(79, 30);
             this.btnModificar.TabIndex = 3;
@@ -335,7 +335,7 @@
             // 
             this.btnBaja.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBaja.Location = new System.Drawing.Point(92, 15);
-            this.btnBaja.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnBaja.Margin = new System.Windows.Forms.Padding(2);
             this.btnBaja.Name = "btnBaja";
             this.btnBaja.Size = new System.Drawing.Size(79, 30);
             this.btnBaja.TabIndex = 2;
@@ -346,7 +346,7 @@
             // 
             this.btnNuevo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNuevo.Location = new System.Drawing.Point(8, 50);
-            this.btnNuevo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnNuevo.Margin = new System.Windows.Forms.Padding(2);
             this.btnNuevo.Name = "btnNuevo";
             this.btnNuevo.Size = new System.Drawing.Size(79, 30);
             this.btnNuevo.TabIndex = 1;
@@ -357,7 +357,7 @@
             // 
             this.btnAlta.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAlta.Location = new System.Drawing.Point(8, 15);
-            this.btnAlta.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAlta.Margin = new System.Windows.Forms.Padding(2);
             this.btnAlta.Name = "btnAlta";
             this.btnAlta.Size = new System.Drawing.Size(79, 30);
             this.btnAlta.TabIndex = 0;
@@ -386,9 +386,12 @@
             this.Controls.Add(this.txtMensaje);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.Formato.ResumeLayout(false);
             this.Formato.PerformLayout();
             this.Estado.ResumeLayout(false);
