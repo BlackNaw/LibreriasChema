@@ -55,7 +55,7 @@
     <Compile Include="Persistencia\AccesoLibroDAO.cs" />
     <Compile Include="Persistencia\ConexionJDBC.cs" />
     <Compile Include="Persistencia\IAcceso.cs" />
-    <Compile Include="Persistencia\Util.cs" />
+    <Compile Include="Comun\Util.cs" />
     <Compile Include="Persistencia\UtilSQL.cs" />
     <Compile Include="Vista\Form1.cs">
       <SubType>Form</SubType>
@@ -63,7 +63,7 @@
     <Compile Include="Vista\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Negocio\Libro.cs" />
+    <Compile Include="Negocio\TLibro.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Vista\Form1.resx">
@@ -92,8 +92,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Comun\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

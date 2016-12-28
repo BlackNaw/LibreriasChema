@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibreriaV3._1.Comun;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LibreriaV3._1.Modelo
 {
-    class Libro
+    class TLibro
     {
         public string CodLibro { get; set; }
         public string Autor { get; set; }
@@ -21,11 +22,11 @@ namespace LibreriaV3._1.Modelo
         public int Borrado { get; set; }
 
         //Constructors
-        public Libro()
+        public TLibro()
         {
         }
 
-        public Libro(int borrado,string codLibro, string autor, string titulo, string tema, string paginas, string precio, string formatouno, string formatodos, string formatotres, string estado)
+        public TLibro(int borrado,string codLibro, string autor, string titulo, string tema, string paginas, string precio, string formatouno, string formatodos, string formatotres, string estado)
         {
             this.CodLibro = codLibro;
             this.Autor = autor;
@@ -40,9 +41,9 @@ namespace LibreriaV3._1.Modelo
             this.Borrado = borrado;
         }
 
-        public Libro(string autor, string titulo, string tema, string paginas, string precio, string formatouno, string formatodos, string formatotres, string estado)
+        public TLibro(string autor, string titulo, string tema, string paginas, string precio, string formatouno, string formatodos, string formatotres, string estado)
         {
-            this.CodLibro = "";
+            this.CodLibro = Util.GenerarCodigo(this.GetType());
             this.Autor = autor;
             this.Titulo = titulo;
             this.Tema = tema;

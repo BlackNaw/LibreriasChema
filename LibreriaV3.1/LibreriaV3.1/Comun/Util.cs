@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace LibreriaV3._1.Persistencia
+namespace LibreriaV3._1.Comun
 {
     class Util
     {
@@ -65,6 +65,24 @@ namespace LibreriaV3._1.Persistencia
                 }
             }
             return true;
+        }
+        public static String GenerarCodigo(Type clase)
+        {
+            string codigo = new AccesoBD().ObtenerCodigo(clase);
+            if (codigo == null)
+            {
+                return "cod001";
+            }
+            int indice = int.Parse(codigo.Substring(3)) + 1;
+            if (indice >= 10)
+                return "cod0" + indice;
+            else if (indice >= 100)
+                return "cod" + indice;
+            else
+                return "cod00" + indice;
+
+            //return "cod" + (indice >= 10 ? "0" + indice : (indice >= 100) ? indice : "00" + indice);
+
         }
     }
 }
