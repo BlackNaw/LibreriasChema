@@ -30,12 +30,12 @@ namespace LibreriaV3._1
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            ConexionJDBC.cerrarConexion();
+            ConexionJDBC.CerrarConexion();
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            ConexionJDBC.cerrarConexion();
+            ConexionJDBC.CerrarConexion();
         }
     }
 }

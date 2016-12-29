@@ -8,11 +8,12 @@ namespace LibreriaV3._1.Persistencia
 {
     interface IAcceso<obj>
     {
-        bool insertar(obj obj);
-        bool borrar(object objeto);
-        Object buscar(Type clase, String nombre);
-        List<string> obtener(Type clase);
-        bool modificar(string nombre, obj obj);
-        bool borradoVirtual(object objeto)
+        bool Insertar(obj obj);
+        bool Borrar(object objeto);
+        Object Buscar(Type clase, String nombre);
+        List<object> Obtener(Type clase);
+        bool Modificar(string nombre, obj obj);
+        bool BorradoVirtual(object objeto);
+        List<object> Buscar(Type clase, string campo, string busqueda);
     }
 }

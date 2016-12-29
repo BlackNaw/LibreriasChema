@@ -52,7 +52,7 @@
   <ItemGroup>
     <Compile Include="Negocio\ControlAccesoLibroDAO.cs" />
     <Compile Include="Persistencia\AccesoBD.cs" />
-    <Compile Include="Persistencia\AccesoLibroDAO.cs" />
+    <Compile Include="Persistencia\AccesoDAO.cs" />
     <Compile Include="Persistencia\ConexionJDBC.cs" />
     <Compile Include="Persistencia\IAcceso.cs" />
     <Compile Include="Comun\Util.cs" />

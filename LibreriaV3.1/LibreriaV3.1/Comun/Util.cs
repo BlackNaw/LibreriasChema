@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization.Formatters.Binary;
+using LibreriaV3._1.Persistencia;
 
 namespace LibreriaV3._1.Comun
 {
@@ -80,9 +81,6 @@ namespace LibreriaV3._1.Comun
                 return "cod" + indice;
             else
                 return "cod00" + indice;
-
-            //return "cod" + (indice >= 10 ? "0" + indice : (indice >= 100) ? indice : "00" + indice);
-
         }
     }
 }

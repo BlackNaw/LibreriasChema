@@ -10,7 +10,7 @@ namespace LibreriaV3._1.Persistencia
 {
     public class ConexionJDBC
     {
-        private static MySqlConnection connection=null;
+        private static MySqlConnection connection = null;
 
         public static MySqlConnection AbrirConexion()
         {
@@ -19,9 +19,9 @@ namespace LibreriaV3._1.Persistencia
                 try
                 {
                     connection = new MySqlConnection();
-                    connection.ConnectionString = "Server=" + ConfigurationManager.AppSettings["servidor"].ToString() + 
+                    connection.ConnectionString = "Server=" + ConfigurationManager.AppSettings["servidor"].ToString() +
                         ";Database=" + ConfigurationManager.AppSettings["baseDatos"].ToString()
-                        + ";Uid=" + ConfigurationManager.AppSettings["usuario"].ToString() + 
+                        + ";Uid=" + ConfigurationManager.AppSettings["usuario"].ToString() +
                         ";Pwd=" + ConfigurationManager.AppSettings["password"].ToString() + ";";
                     connection.Open();
                 }
@@ -39,13 +39,10 @@ namespace LibreriaV3._1.Persistencia
             {
                 connection.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message, ex);
             }
         }
-
-
     }
-
 }
