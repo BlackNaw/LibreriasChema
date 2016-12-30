@@ -50,24 +50,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Negocio\ControlAccesoLibroDAO.cs" />
-    <Compile Include="Persistencia\AccesoBD.cs" />
-    <Compile Include="Persistencia\AccesoDAO.cs" />
-    <Compile Include="Persistencia\ConexionJDBC.cs" />
-    <Compile Include="Persistencia\IAcceso.cs" />
     <Compile Include="Comun\Util.cs" />
+    <Compile Include="Negocio\ControlAccesoDAO.cs" />
+    <Compile Include="Persistencia\AccesoDAO.cs" />
     <Compile Include="Persistencia\UtilSQL.cs" />
-    <Compile Include="Vista\Form1.cs">
+    <Compile Include="Vista\Libro.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vista\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Vista\Libro.Designer.cs">
+      <DependentUpon>Libro.cs</DependentUpon>
     </Compile>
     <Compile Include="Negocio\TLibro.cs" />
+    <Compile Include="Persistencia\AccesoBD.cs" />
+    <Compile Include="Persistencia\ConexionJDBC.cs" />
+    <Compile Include="Persistencia\IAcceso.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Vista\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Vista\Libro.resx">
+      <DependentUpon>Libro.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -78,7 +78,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

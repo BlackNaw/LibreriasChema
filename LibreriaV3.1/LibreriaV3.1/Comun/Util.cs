@@ -1,18 +1,14 @@
-﻿using System;
+﻿using LibreriaV3._1.Persistencia;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Windows.Forms;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.Serialization.Formatters.Binary;
-using LibreriaV3._1.Persistencia;
 
 namespace LibreriaV3._1.Comun
 {
     class Util
     {
-        //private static string ruta = Path.Combine(Application.StartupPath, "files\\sql.txt");
         private static string ruta = "sql.txt";
         private static Dictionary<string, string> SENTENCIAS;
         static BinaryFormatter serializer = new BinaryFormatter();
@@ -21,8 +17,6 @@ namespace LibreriaV3._1.Comun
         {
             return SENTENCIAS;
         }
-
-
 
         public static void RellenarDictionarySentencias()
         {
@@ -67,10 +61,10 @@ namespace LibreriaV3._1.Comun
             }
             return true;
         }
-        public static String GenerarCodigo(Type clase)
+        public static string GenerarCodigo(Type clase)
         {
             string codigo = new AccesoBD().ObtenerCodigo(clase);
-            if (codigo == null)
+            if (codigo.Equals(""))
             {
                 return "cod001";
             }
@@ -82,5 +76,7 @@ namespace LibreriaV3._1.Comun
             else
                 return "cod00" + indice;
         }
+
+        
     }
 }

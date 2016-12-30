@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Configuration;
 using MySql.Data.MySqlClient;
+using System.Collections;
 using System.Reflection;
+using LibreriaV3._1.Comun;
 
 namespace LibreriaV3._1.Persistencia
 {
@@ -18,29 +19,28 @@ namespace LibreriaV3._1.Persistencia
         public AccesoBD()
         {
             connection = ConexionJDBC.AbrirConexion();
+            Util.RellenarDictionarySentencias();
         }
 
-        public bool Insertar(string sql, object objeto, string antiguo)
+        public bool Insertar(string sql, object objecto, string antiguo)
         {
-            Dictionary<string, object> map = ObtenerDictionaryValorPropiedades(objeto);
             try
             {
-                comando = new MySqlCommand(sql, connection);
+                //"SELECT * FROM admin WHERE admin_username=@val1 AND admin_password=PASSWORD(@val2)"
+                comando = new MySqlCommand(sql, connection); ///Esto es como preparedStatement
+                Dictionary<string, object> map = ObtenerDictionaryValorPropiedades(objecto);
                 int index = 1;
-                foreach (object valor in map.Values)
+                foreach (string valor in map.Values)
                 {
-                    comando.Parameters.AddWithValue("@index", valor);
+                    comando.Parameters.AddWithValue("@"+index++, valor);
                 }
                 if (sql.Contains("UPDATE"))
                 {
-                    comando.Parameters.AddWithValue("@index", antiguo);
+                    comando.Parameters.AddWithValue("@" + index, antiguo);
                 }
-
+                
             }
-            catch (Exception e)
-            {
-                return false;
-            }
+            catch (Exception) { throw; }
             return comando.ExecuteNonQuery() > 0;
         }
 
@@ -51,7 +51,7 @@ namespace LibreriaV3._1.Persistencia
                 comando = new MySqlCommand(sql, connection);
                 comando.Parameters.AddWithValue("@1", ObtenerValorClavePrimaria(objeto));
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw;
             }
@@ -60,31 +60,36 @@ namespace LibreriaV3._1.Persistencia
 
         public List<object> Consultar(string sql, Type clase, string nombre)
         {
-            MySqlDataReader sqlDataReader = null;
             List<object> objetos = null;
+            MySqlDataReader sqlDataReader = null;
             try
             {
                 comando = new MySqlCommand(sql, connection);
                 if (!nombre.Equals(""))
                 {
-                    comando.Parameters.AddWithValue("@1", nombre);
+                    comando.Parameters.AddWithValue("@a1", nombre);
                 }
                 sqlDataReader = comando.ExecuteReader();
                 if (sqlDataReader != null)
-                    objetos = new List<object>();
-                List<string> list = ObtenerNombrePropiedades(clase);
-                while (sqlDataReader.Read())
                 {
-                    object obj = Activator.CreateInstance(clase);
-                    foreach (string nombrename in list)
+                    objetos = new List<object>();
+                    List<string> list = ObtenerNombrePropiedades(clase);
                     {
-                        string valor = sqlDataReader[nombre].ToString();
-                        PropertyInfo propiedad = obj.GetType().GetProperty(nombre);
-                        propiedad.SetValue(obj, Convert.ChangeType(valor, propiedad.PropertyType), null);
+                        while (sqlDataReader.Read())
+                        {
+                            object obj = Activator.CreateInstance(clase);
+                            foreach (string name in list)
+                            {
+                                string valor = (String)sqlDataReader[name].ToString();
+                                PropertyInfo propiedad = obj.GetType().GetProperty(name);
+                                propiedad.SetValue(obj, Convert.ChangeType(valor, propiedad.PropertyType), null);
 
+                            }
+                            objetos.Add(obj);
+                        }
                     }
-                    objetos.Add(obj);
                 }
+
             }
             catch (Exception)
             {
@@ -94,39 +99,10 @@ namespace LibreriaV3._1.Persistencia
             finally
             {
                 sqlDataReader.Close();
-                connection.Close();
             }
-
             return objetos;
         }
 
-
-        /*
-        * Obtiene un diccionario con el nombre de la propiedad y su valor
-        */
-        protected static Dictionary<string, object> ObtenerDictionaryValorPropiedades(object objeto)
-        {
-            Dictionary<string, object> mapM = new Dictionary<string, object>();
-            foreach (PropertyInfo method in objeto.GetType().GetProperties())
-            {
-                mapM.Add(method.Name, method.GetValue(objeto, null));
-            }
-            return mapM;
-        }
-        /*
-        * Se obtiene una lista con el nombre de las propiedades para, posteriormente, hacer el set
-        */
-        public static List<string> ObtenerNombrePropiedades(Type clase)
-        {
-            List<string> lista = new List<string>();
-            //Recorremos las propiedades y almacenamos el nombre
-            foreach (PropertyInfo propiedad in clase.GetProperties())
-            {
-                lista.Add(propiedad.Name);
-            }
-
-            return lista;
-        }
         public static string ObtenerValorClavePrimaria(object objeto)
         {
             foreach (PropertyInfo propiedad in objeto.GetType().GetProperties())
@@ -138,18 +114,49 @@ namespace LibreriaV3._1.Persistencia
             }
             return null;
         }
-        public string ObtenerCodigo(Type clase)
+
+        /*
+       * Obtiene un diccionario con el nombre de la propiedad y el valor de ella
+       */
+        protected static Dictionary<string, object> ObtenerDictionaryValorPropiedades(object objeto)
         {
-            string sql = "SELECT MAX(cod" + clase.Name.Substring(1) + ") FROM " + clase.Name.ToLower();
+            Dictionary<string, object> mapM = new Dictionary<string, object>();
+            foreach (PropertyInfo method in objeto.GetType().GetProperties())
+            {
+                mapM.Add(method.Name, method.GetValue(objeto, null));
+            }
+            return mapM;
+        }
+        /*
+       * Se obtiene una lista con el nombre de las propiedades para, posteriormente, hacer el set
+       */
+        public static List<string> ObtenerNombrePropiedades(Type clase)
+        {
+            List<string> lista = new List<string>();
+            //Recorremos las propiedades y almacenamos el nombre
+            foreach (PropertyInfo propiedad in clase.GetProperties())
+            {
+                lista.Add(propiedad.Name);
+            }
+            return lista;
+        }
+
+        public List<string> ObtenerTemas()
+        {
+            List<string> temas = new List<string>();
             MySqlDataReader sqlDataReader = null;
+            string sql = "SELECT * FROM tema";
             try
             {
                 comando = new MySqlCommand(sql, connection);
-                //Introduce los datos en la tabla
                 sqlDataReader = comando.ExecuteReader();
-                return sqlDataReader.GetString(1);
+                while (sqlDataReader.Read())
+                {
+                    temas.Add(sqlDataReader[0].ToString());
+                }
+                return temas;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return null;
             }
@@ -159,25 +166,18 @@ namespace LibreriaV3._1.Persistencia
             }
         }
 
-        public List<string> ObtenerTemas()
+        public string ObtenerCodigo(Type clase)
         {
-            List<string> temas = new List<string>();
-            string sql = "SELECT * FROM tema";
+            string sql = "SELECT MAX(Cod" + clase.Name.Substring(1) + ") FROM " + clase.Name.ToLower();
             MySqlDataReader sqlDataReader = null;
             try
             {
                 comando = new MySqlCommand(sql, connection);
                 sqlDataReader = comando.ExecuteReader();
-                while (sqlDataReader.Read())
-                {
-                    temas.Add(sqlDataReader.GetString(1));
-                }
-                return temas;
+                sqlDataReader.Read();
+                return sqlDataReader[0].ToString();
             }
-            catch (Exception e)
-            {
-                return null;
-            }
+            catch (Exception) { return null; }
             finally
             {
                 sqlDataReader.Close();
@@ -188,14 +188,20 @@ namespace LibreriaV3._1.Persistencia
         {
             transaccion = connection.BeginTransaction();
         }
+
+        public void RollBack()
+        {
+            transaccion.Rollback();
+        }
+
         public void Commit()
         {
             transaccion.Commit();
         }
 
-        public void Rollback()
+        public void CloseConnection()
         {
-            transaccion.Rollback();
+            connection.Close();
         }
     }
 }

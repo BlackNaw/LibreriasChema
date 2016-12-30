@@ -1,6 +1,6 @@
 ﻿namespace LibreriaV3._1
 {
-    partial class Form1
+    partial class Libro
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -48,13 +48,13 @@
             this.Estado = new System.Windows.Forms.GroupBox();
             this.rbReedicion = new System.Windows.Forms.RadioButton();
             this.rbNovedad = new System.Windows.Forms.RadioButton();
-            this.lstLibros = new System.Windows.Forms.ListView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnBaja = new System.Windows.Forms.Button();
             this.btnNuevo = new System.Windows.Forms.Button();
             this.btnAlta = new System.Windows.Forms.Button();
+            this.lstLibros = new System.Windows.Forms.ListBox();
             this.Formato.SuspendLayout();
             this.Estado.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -92,6 +92,7 @@
             this.txtMensaje.Name = "txtMensaje";
             this.txtMensaje.Size = new System.Drawing.Size(232, 26);
             this.txtMensaje.TabIndex = 2;
+            this.txtMensaje.TextChanged += new System.EventHandler(this.txtMensaje_TextChanged);
             // 
             // txtTitulo
             // 
@@ -285,16 +286,6 @@
             this.rbNovedad.Text = "Novedad";
             this.rbNovedad.UseVisualStyleBackColor = true;
             // 
-            // lstLibros
-            // 
-            this.lstLibros.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lstLibros.Location = new System.Drawing.Point(380, 94);
-            this.lstLibros.Margin = new System.Windows.Forms.Padding(2);
-            this.lstLibros.Name = "lstLibros";
-            this.lstLibros.Size = new System.Drawing.Size(232, 435);
-            this.lstLibros.TabIndex = 15;
-            this.lstLibros.UseCompatibleStateImageBehavior = false;
-            // 
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -326,7 +317,7 @@
             this.btnModificar.Location = new System.Drawing.Point(92, 50);
             this.btnModificar.Margin = new System.Windows.Forms.Padding(2);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(79, 30);
+            this.btnModificar.Size = new System.Drawing.Size(88, 30);
             this.btnModificar.TabIndex = 3;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
@@ -337,7 +328,7 @@
             this.btnBaja.Location = new System.Drawing.Point(92, 15);
             this.btnBaja.Margin = new System.Windows.Forms.Padding(2);
             this.btnBaja.Name = "btnBaja";
-            this.btnBaja.Size = new System.Drawing.Size(79, 30);
+            this.btnBaja.Size = new System.Drawing.Size(88, 30);
             this.btnBaja.TabIndex = 2;
             this.btnBaja.Text = "Baja";
             this.btnBaja.UseVisualStyleBackColor = true;
@@ -352,6 +343,7 @@
             this.btnNuevo.TabIndex = 1;
             this.btnNuevo.Text = "Nuevo";
             this.btnNuevo.UseVisualStyleBackColor = true;
+            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
             // btnAlta
             // 
@@ -363,14 +355,23 @@
             this.btnAlta.TabIndex = 0;
             this.btnAlta.Text = "Alta";
             this.btnAlta.UseVisualStyleBackColor = true;
+            this.btnAlta.Click += new System.EventHandler(this.btnAlta_Click);
             // 
-            // Form1
+            // lstLibros
+            // 
+            this.lstLibros.FormattingEnabled = true;
+            this.lstLibros.Location = new System.Drawing.Point(376, 102);
+            this.lstLibros.Name = "lstLibros";
+            this.lstLibros.Size = new System.Drawing.Size(226, 407);
+            this.lstLibros.TabIndex = 17;
+            // 
+            // Libro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(627, 549);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.lstLibros);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.Estado);
             this.Controls.Add(this.Formato);
             this.Controls.Add(this.cbxTemas);
@@ -387,7 +388,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "Form1";
+            this.Name = "Libro";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
@@ -424,13 +425,13 @@
         private System.Windows.Forms.GroupBox Estado;
         private System.Windows.Forms.RadioButton rbReedicion;
         private System.Windows.Forms.RadioButton rbNovedad;
-        private System.Windows.Forms.ListView lstLibros;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button btnBaja;
         private System.Windows.Forms.Button btnNuevo;
         private System.Windows.Forms.Button btnAlta;
+        private System.Windows.Forms.ListBox lstLibros;
     }
 }
 

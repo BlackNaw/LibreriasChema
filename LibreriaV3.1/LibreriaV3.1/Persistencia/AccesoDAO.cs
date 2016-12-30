@@ -22,9 +22,9 @@ namespace LibreriaV3._1.Persistencia
                     item.SetValue(objeto, 1);
                 }
             }
-            if ((sql = ExisteSentencia("BorradoVirtual" + objeto.GetType().Name)) == null)
+            if ((sql = ExisteSentencia("BORRADOVIRTUAL" + objeto.GetType().Name)) == null)
             {
-                if (acceso.Insertar(UtilSQL.SqlModificar(objeto), objeto, AccesoBD.ObtenerValorClavePrimaria(objeto)))
+                if (acceso.Insertar(GuardarSQL("BORRADOVIRTUAL" + objeto.GetType().Name, UtilSQL.SqlModificar(objeto)), objeto, AccesoBD.ObtenerValorClavePrimaria(objeto)))
                 {
                     acceso.Commit();
                     return true;
@@ -38,32 +38,32 @@ namespace LibreriaV3._1.Persistencia
                     return true;
                 }
             }
-            acceso.Rollback();
+            acceso.RollBack();
             return false;
         }
 
         public bool Borrar(object objeto)
         {
-            AccesoBD accesoBD = new AccesoBD();
-            accesoBD.StartTransaction();
-            String sql;
+            AccesoBD acceso = new AccesoBD();
+            acceso.StartTransaction();
+            string sql;
             if ((sql = ExisteSentencia("DELETE" + objeto.GetType().Name)) == null)
             {
-                if (accesoBD.Borrar(GuardarSQL("DELETE" + objeto.GetType().Name, UtilSQL.SqlBorrar(objeto)), objeto))
+                if (acceso.Borrar(GuardarSQL("DELETE" + objeto.GetType().Name, UtilSQL.SqlBorrar(objeto)), objeto))
                 {
-                    accesoBD.Commit();
+                    acceso.Commit();
                     return true;
                 }
             }
             else
             {
-                if (accesoBD.Borrar(sql, objeto))
+                if (acceso.Borrar(sql, objeto))
                 {
-                    accesoBD.Commit();
+                    acceso.Commit();
                     return true;
                 }
             }
-            accesoBD.Rollback();
+            acceso.RollBack();
             return false;
         }
 
@@ -98,71 +98,83 @@ namespace LibreriaV3._1.Persistencia
 
         public bool Insertar(T objeto)
         {
-            AccesoBD accesoBD = new AccesoBD();
-            accesoBD.StartTransaction();
-            String sql;
-            if ((sql = ExisteSentencia("INSERT" + objeto.GetType().Name)) == null)
+            AccesoBD acceso = new AccesoBD();
+            acceso.StartTransaction();
+            string sql;
+            if ((sql = ExisteSentencia("INSERTAR" + objeto.GetType().Name)) == null)
             {
-                if (accesoBD.Insertar(GuardarSQL("INSERT" + objeto.GetType().Name, UtilSQL.SqlInsertar(objeto)), objeto, ""))
+                if (acceso.Insertar(GuardarSQL("INSERTAR" + objeto.GetType().Name, UtilSQL.SqlInsertar(objeto)), objeto, ""))
                 {
-                    accesoBD.Commit();
+                    acceso.Commit();
                     return true;
                 }
             }
             else
             {
-                if (accesoBD.Insertar(sql, objeto, ""))
+                if (acceso.Insertar(sql, objeto, ""))
                 {
-                    accesoBD.Commit();
+                    acceso.Commit();
                     return true;
                 }
             }
-            accesoBD.Rollback();
+            acceso.RollBack();
+            return false;
+
+        }
+
+        public bool Modificar(string nombre, T objeto)
+        {
+            AccesoBD acceso = new AccesoBD();
+            acceso.StartTransaction();
+            string sql;
+            if((sql = ExisteSentencia("UPDATE" + objeto.GetType().Name)) == null)
+            {
+                if(acceso.Insertar(GuardarSQL("UPDATE" + objeto.GetType().Name, UtilSQL.SqlModificar(objeto)), objeto, nombre))
+                {
+                    acceso.Commit();
+                    return true;
+                }
+                else
+                {
+                    if (acceso.Insertar(sql, objeto, nombre))
+                    {
+                        acceso.Commit();
+                        return true;
+                    }
+                }
+            }
+            acceso.RollBack();
             return false;
         }
 
-        public bool Modificar(string nombre, T obj)
+        public List<Object> Obtener(Type clase)
         {
-            AccesoBD accesoBD = new AccesoBD();
-            accesoBD.StartTransaction();
-            String sql;
-            if ((sql = ExisteSentencia("UPDATE" + obj.GetType().Name)) == null)
-            {
-                if (accesoBD.Insertar(GuardarSQL("UPDATE" + obj.GetType().Name, UtilSQL.SqlModificar(obj)), obj, nombre))
-                {
-                    accesoBD.Commit();
-                    return true;
-                }
-            }
-            else
-            {
-                if (accesoBD.Insertar(sql, obj, nombre))
-                {
-                    accesoBD.Commit();
-                    return true;
-
-                }
-                accesoBD.Rollback();
-            }
-            return false;
-        }
-
-        public List<object> Obtener(Type clase)
-        {
-            AccesoBD accesoBD = new AccesoBD();
-            String sql;
+            AccesoBD acceso = new AccesoBD();
+            string sql;
             if ((sql = ExisteSentencia("SELECTALL" + clase.Name)) == null)
             {
-                return accesoBD.Consultar(GuardarSQL("SELECTALL" + clase.Name, UtilSQL.SqlObtener(clase)), clase, "");
+                return (acceso.Consultar(GuardarSQL("SELECTALL" + clase.Name, UtilSQL.SqlObtener(clase)), clase, ""));
             }
             else
             {
-                return accesoBD.Consultar(sql, clase, "");
-
+                return acceso.Consultar(sql, clase, "");
             }
+
         }
 
-        private String ExisteSentencia(String orden)
+        public List<string> ObtenerTemas()
+        {
+            AccesoBD accesoBD = new AccesoBD();
+            return accesoBD.ObtenerTemas();
+        }
+
+        private string GuardarSQL(string orden, string sql)
+        {
+            Util.getSENTENCIAS().Add(orden, sql);
+            return sql;
+        }
+
+        private string ExisteSentencia(string orden)
         {
             foreach (var item in Util.getSENTENCIAS())
             {
@@ -174,16 +186,6 @@ namespace LibreriaV3._1.Persistencia
             return null;
         }
 
-        private String GuardarSQL(String orden, String sql)
-        {
-            Util.getSENTENCIAS().Add(orden, sql);
-            return sql;
-        }
 
-        public List<string> ObtenerTemas()
-        {
-            AccesoBD accesoBD = new AccesoBD();
-            return accesoBD.ObtenerTemas();
-        }
     }
 }
