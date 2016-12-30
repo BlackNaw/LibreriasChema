@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LibreriaV3._1.Persistencia
 {
-    class AccesoDAO<T> : IAcceso<T> where T : new()
+   public class AccesoDAO<T> : IAcceso<T> where T : new()
     {
         public bool BorradoVirtual(object objeto)
         {
@@ -19,12 +19,12 @@ namespace LibreriaV3._1.Persistencia
             {
                 if (item.Name.Contains("Borra"))
                 {
-                    item.SetValue(objeto, 1);
+                    item.SetValue(objeto,"1");
                 }
             }
-            if ((sql = ExisteSentencia("BORRADOVIRTUAL" + objeto.GetType().Name)) == null)
+            if ((sql = Util.ExisteSentencia("BORRADOVIRTUAL" + objeto.GetType().Name)) == null)
             {
-                if (acceso.Insertar(GuardarSQL("BORRADOVIRTUAL" + objeto.GetType().Name, UtilSQL.SqlModificar(objeto)), objeto, AccesoBD.ObtenerValorClavePrimaria(objeto)))
+                if (acceso.Insertar(Util.GuardarSQL("BORRADOVIRTUAL" + objeto.GetType().Name, UtilSQL.SqlModificar(objeto)), objeto, AccesoBD.ObtenerValorClavePrimaria(objeto)))
                 {
                     acceso.Commit();
                     return true;
@@ -47,9 +47,9 @@ namespace LibreriaV3._1.Persistencia
             AccesoBD acceso = new AccesoBD();
             acceso.StartTransaction();
             string sql;
-            if ((sql = ExisteSentencia("DELETE" + objeto.GetType().Name)) == null)
+            if ((sql = Util.ExisteSentencia("DELETE" + objeto.GetType().Name)) == null)
             {
-                if (acceso.Borrar(GuardarSQL("DELETE" + objeto.GetType().Name, UtilSQL.SqlBorrar(objeto)), objeto))
+                if (acceso.Borrar(Util.GuardarSQL("DELETE" + objeto.GetType().Name, UtilSQL.SqlBorrar(objeto)), objeto))
                 {
                     acceso.Commit();
                     return true;
@@ -72,9 +72,9 @@ namespace LibreriaV3._1.Persistencia
             List<object> list = null;
             AccesoBD accesoBD = new AccesoBD();
             String sql;
-            if ((sql = ExisteSentencia("SELECTONE" + clase.Name)) == null)
+            if ((sql = Util.ExisteSentencia("SELECTONE" + clase.Name)) == null)
             {
-                if ((list = accesoBD.Consultar(GuardarSQL("SELECTONE" + clase.Name, UtilSQL.SqlBuscar(clase)), clase, nombre)).Count == 0)
+                if ((list = accesoBD.Consultar(Util.GuardarSQL("SELECTONE" + clase.Name, UtilSQL.SqlBuscar(clase)), clase, nombre)).Count == 0)
                 {
                     return null;
                 }
@@ -101,9 +101,9 @@ namespace LibreriaV3._1.Persistencia
             AccesoBD acceso = new AccesoBD();
             acceso.StartTransaction();
             string sql;
-            if ((sql = ExisteSentencia("INSERTAR" + objeto.GetType().Name)) == null)
+            if ((sql = Util.ExisteSentencia("INSERTAR" + objeto.GetType().Name)) == null)
             {
-                if (acceso.Insertar(GuardarSQL("INSERTAR" + objeto.GetType().Name, UtilSQL.SqlInsertar(objeto)), objeto, ""))
+                if (acceso.Insertar(Util.GuardarSQL("INSERTAR" + objeto.GetType().Name, UtilSQL.SqlInsertar(objeto)), objeto, ""))
                 {
                     acceso.Commit();
                     return true;
@@ -127,9 +127,9 @@ namespace LibreriaV3._1.Persistencia
             AccesoBD acceso = new AccesoBD();
             acceso.StartTransaction();
             string sql;
-            if((sql = ExisteSentencia("UPDATE" + objeto.GetType().Name)) == null)
+            if((sql = Util.ExisteSentencia("UPDATE" + objeto.GetType().Name)) == null)
             {
-                if(acceso.Insertar(GuardarSQL("UPDATE" + objeto.GetType().Name, UtilSQL.SqlModificar(objeto)), objeto, nombre))
+                if(acceso.Insertar(Util.GuardarSQL("UPDATE" + objeto.GetType().Name, UtilSQL.SqlModificar(objeto)), objeto, nombre))
                 {
                     acceso.Commit();
                     return true;
@@ -151,9 +151,9 @@ namespace LibreriaV3._1.Persistencia
         {
             AccesoBD acceso = new AccesoBD();
             string sql;
-            if ((sql = ExisteSentencia("SELECTALL" + clase.Name)) == null)
+            if ((sql = Util.ExisteSentencia("SELECTALL" + clase.Name)) == null)
             {
-                return (acceso.Consultar(GuardarSQL("SELECTALL" + clase.Name, UtilSQL.SqlObtener(clase)), clase, ""));
+                return (acceso.Consultar(Util.GuardarSQL("SELECTALL" + clase.Name, UtilSQL.SqlObtener(clase)), clase, ""));
             }
             else
             {
@@ -168,23 +168,6 @@ namespace LibreriaV3._1.Persistencia
             return accesoBD.ObtenerTemas();
         }
 
-        private string GuardarSQL(string orden, string sql)
-        {
-            Util.getSENTENCIAS().Add(orden, sql);
-            return sql;
-        }
-
-        private string ExisteSentencia(string orden)
-        {
-            foreach (var item in Util.getSENTENCIAS())
-            {
-                if (item.Key.Equals(orden))
-                {
-                    return item.Value;
-                }
-            }
-            return null;
-        }
 
 
     }

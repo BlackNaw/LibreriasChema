@@ -10,7 +10,7 @@ using LibreriaV3._1.Comun;
 
 namespace LibreriaV3._1.Persistencia
 {
-    class AccesoBD
+    public class AccesoBD
     {
         private static MySqlConnection connection = null;
         private MySqlTransaction transaccion;

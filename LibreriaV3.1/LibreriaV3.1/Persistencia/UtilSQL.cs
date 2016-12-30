@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibreriaV3._1.Persistencia
 {
-    class UtilSQL
+    public class UtilSQL
     {
         private static StringBuilder sql = new StringBuilder();
 
@@ -42,7 +42,7 @@ namespace LibreriaV3._1.Persistencia
                 sql.Append(item+" = @" + (index++) + " , ");
             }
             sql.Remove(sql.Length - 2, 2);
-            sql.Append("WHERE " + objeto.GetType() + " = @" + index);
+            sql.Append("WHERE " + obtenerClave(objeto.GetType()) + " = @" + index);
             return sql.ToString();
         }
 

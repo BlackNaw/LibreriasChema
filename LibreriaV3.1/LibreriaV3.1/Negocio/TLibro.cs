@@ -3,7 +3,7 @@
 
 namespace LibreriaV3._1.Modelo
 {
-    class TLibro
+    public class TLibro
     {
         public string CodLibro { get; set; }
         public string Autor { get; set; }

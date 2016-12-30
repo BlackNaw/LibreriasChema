@@ -142,6 +142,7 @@
             this.txtPrecio.Name = "txtPrecio";
             this.txtPrecio.Size = new System.Drawing.Size(242, 26);
             this.txtPrecio.TabIndex = 8;
+            this.txtPrecio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecio_KeyPress);
             // 
             // label5
             // 
@@ -159,9 +160,11 @@
             this.txtPaginas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPaginas.Location = new System.Drawing.Point(92, 182);
             this.txtPaginas.Margin = new System.Windows.Forms.Padding(2);
+            this.txtPaginas.MaxLength = 30;
             this.txtPaginas.Name = "txtPaginas";
             this.txtPaginas.Size = new System.Drawing.Size(242, 26);
             this.txtPaginas.TabIndex = 10;
+            this.txtPaginas.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPaginas_KeyPress);
             // 
             // label6
             // 
@@ -187,6 +190,7 @@
             // 
             // cbxTemas
             // 
+            this.cbxTemas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxTemas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbxTemas.FormattingEnabled = true;
             this.cbxTemas.Location = new System.Drawing.Point(92, 153);
@@ -310,6 +314,7 @@
             this.btnSalir.TabIndex = 4;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // btnModificar
             // 
@@ -321,6 +326,7 @@
             this.btnModificar.TabIndex = 3;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // btnBaja
             // 
@@ -332,6 +338,7 @@
             this.btnBaja.TabIndex = 2;
             this.btnBaja.Text = "Baja";
             this.btnBaja.UseVisualStyleBackColor = true;
+            this.btnBaja.Click += new System.EventHandler(this.btnBaja_Click);
             // 
             // btnNuevo
             // 
@@ -364,6 +371,7 @@
             this.lstLibros.Name = "lstLibros";
             this.lstLibros.Size = new System.Drawing.Size(226, 407);
             this.lstLibros.TabIndex = 17;
+            this.lstLibros.SelectedIndexChanged += new System.EventHandler(this.lstLibros_SelectedIndexChanged);
             // 
             // Libro
             // 
@@ -388,7 +396,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(2);
+            this.MaximizeBox = false;
             this.Name = "Libro";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);

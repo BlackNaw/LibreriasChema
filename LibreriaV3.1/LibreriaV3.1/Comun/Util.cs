@@ -1,5 +1,6 @@
 ﻿using LibreriaV3._1.Persistencia;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,16 +8,32 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace LibreriaV3._1.Comun
 {
-    class Util
+    public static class Util
     {
         private static string ruta = "sql.txt";
         private static Dictionary<string, string> SENTENCIAS;
         static BinaryFormatter serializer = new BinaryFormatter();
 
-        public static Dictionary<string, string> getSENTENCIAS()
+
+        public static string GuardarSQL(string orden, string sql)
         {
-            return SENTENCIAS;
+            SENTENCIAS.Add(orden, sql);
+            return sql;
         }
+
+        public static string ExisteSentencia(string orden)
+        {
+            foreach (var item in SENTENCIAS)
+            {
+                if (item.Key.Equals(orden))
+                {
+                    return item.Value;
+                }
+            }
+            return null;
+        }
+
+
 
         public static void RellenarDictionarySentencias()
         {
@@ -25,6 +42,7 @@ namespace LibreriaV3._1.Comun
                 using (var stream = File.OpenRead(ruta))
                 {
                     SENTENCIAS = (Dictionary<string, string>)serializer.Deserialize(stream);
+                    stream.Close();
                 }
 
             }
@@ -41,6 +59,7 @@ namespace LibreriaV3._1.Comun
                 using (var stream = File.OpenWrite(ruta))
                 {
                     serializer.Serialize(stream, SENTENCIAS);
+                    stream.Close();
                 }
             }
         }
@@ -51,7 +70,7 @@ namespace LibreriaV3._1.Comun
             {
                 try
                 {
-                    File.Create(ruta);
+                    File.Create(ruta).Close(); ;
                 }
                 catch
                 {
@@ -77,6 +96,6 @@ namespace LibreriaV3._1.Comun
                 return "cod00" + indice;
         }
 
-        
+
     }
 }

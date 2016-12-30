@@ -14,7 +14,7 @@ using System.Reflection;
 
 namespace LibreriaV3._1.Persistencia
 {
-    class ConexionJDBC
+    public class ConexionJDBC
     {
         private static MySqlConnection connection;
 

@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Comun\MsgBoxUtil.cs" />
     <Compile Include="Comun\Util.cs" />
     <Compile Include="Negocio\ControlAccesoDAO.cs" />
     <Compile Include="Persistencia\AccesoDAO.cs" />

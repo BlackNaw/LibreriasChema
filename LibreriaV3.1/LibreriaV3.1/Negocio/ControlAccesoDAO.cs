@@ -4,7 +4,7 @@ using LibreriaV3._1.Persistencia;
 
 namespace LibreriaV3._1.Negocio
 {
-    class ControlAccesoDAO<T> : IAcceso<T> where T : new()
+    public class ControlAccesoDAO<T> : IAcceso<T> where T : new()
     {
         AccesoDAO<T> accesoDAO = new AccesoDAO<T>();
 
@@ -33,9 +33,9 @@ namespace LibreriaV3._1.Negocio
             return ((IAcceso<T>)accesoDAO).Insertar(objeto);
         }
 
-        public bool Modificar(string nombre, T objeto)
+        public bool Modificar(string clavePrimaria, T objeto)
         {
-            return ((IAcceso<T>)accesoDAO).Modificar(nombre, objeto);
+            return ((IAcceso<T>)accesoDAO).Modificar(clavePrimaria, objeto);
         }
 
         public List<object> Obtener(Type clase)
