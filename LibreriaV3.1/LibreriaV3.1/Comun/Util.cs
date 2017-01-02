@@ -54,7 +54,7 @@ namespace LibreriaV3._1.Comun
 
         public static void EscribirDictionarySentenciasFichero()
         {
-            if (ComprobarArchivo())
+            if (ComprobarArchivo()&&SENTENCIAS!=null&&SENTENCIAS.Count()>0)
             {
                 using (var stream = File.OpenWrite(ruta))
                 {

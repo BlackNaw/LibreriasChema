@@ -54,6 +54,8 @@
     <Compile Include="Comun\Util.cs" />
     <Compile Include="Negocio\TCliente.cs" />
     <Compile Include="Negocio\ControlAccesoDAO.cs" />
+    <Compile Include="Negocio\TFactura.cs" />
+    <Compile Include="Negocio\TLineaFactura.cs" />
     <Compile Include="Persistencia\AccesoDAO.cs" />
     <Compile Include="Persistencia\UtilSQL.cs" />
     <Compile Include="Vista\ConsultarFacturas.cs">
