@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LibreriaV3._1.Comun;
+using LibreriaV3._1.Persistencia;
+using System;
 using System.Windows.Forms;
 
 namespace LibreriaV3._1.Vista
@@ -10,36 +12,38 @@ namespace LibreriaV3._1.Vista
             InitializeComponent();
         }
 
+        
         private void librosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.IsMdiContainer = true;
-            Libro formularioLibros = new Libro();
-            formularioLibros.MdiParent = this;
-            formularioLibros.Show();
+            new Libro().ShowDialog(this);
         }
 
         private void insertarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.IsMdiContainer = true;
-            InsertarFacturas formularioFacturas = new InsertarFacturas();
-            formularioFacturas.MdiParent = this;
-            formularioFacturas.Show();
+            new InsertarFacturas().ShowDialog(this);
         }
 
         private void modificarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.IsMdiContainer = true;
-            ModificarFacturas formularioFacturas = new ModificarFacturas();
-            formularioFacturas.MdiParent = this;
-            formularioFacturas.Show();
+           
         }
 
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.IsMdiContainer = true;
-            BorrarFacturas formularioFacturas = new BorrarFacturas();
-            formularioFacturas.MdiParent = this;
-            formularioFacturas.Show();
+            new ConsultarFacturas().ShowDialog(this);
+        }
+
+        private void clientesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            new Clientes().ShowDialog(this);
+            
+        }
+
+        private void Principal_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Util.EscribirDictionarySentenciasFichero();
+            ConexionJDBC.CerrarConexion();
         }
     }
 }

@@ -15,7 +15,7 @@ namespace LibreriaV3._1.Vista
     public partial class InsertarFacturas : Form
     {
         //ControlAccesoDAO<Cliente> clienteAccesoDao;
-        ControlAccesoDAO<Libro> libroAccesoDao;
+        //ControlAccesoDAO<Libro> libroAccesoDao;
         //ControlAccesoDAO<Factura> facturaAccesoDao;
         //Factura factura;
         //private List<LineaFactura> lineasFactura;

@@ -1,6 +1,6 @@
 ﻿namespace LibreriaV3._1.Vista
 {
-    partial class BorrarFacturas
+    partial class ConsultarFacturas
     {
         /// <summary>
         /// Required designer variable.
@@ -70,9 +70,9 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(143, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(140, 20);
+            this.label1.Size = new System.Drawing.Size(153, 20);
             this.label1.TabIndex = 13;
-            this.label1.Text = "Eliminar Factura";
+            this.label1.Text = "Consultar Factura";
             // 
             // lblCliente
             // 
@@ -199,7 +199,6 @@
             this.Controls.Add(this.label4);
             this.Name = "BorrarFacturas";
             this.Text = "BorrarFacturas";
-            //this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.BorrarFacturas_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

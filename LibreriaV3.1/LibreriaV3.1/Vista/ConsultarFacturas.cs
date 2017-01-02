@@ -12,7 +12,7 @@ using LibreriaV3._1;
 
 namespace LibreriaV3._1.Vista
 {
-    public partial class BorrarFacturas : Form
+    public partial class ConsultarFacturas : Form
     {
         //ControlAccesoDAO<Cliente> clienteAccesoDao;
         ControlAccesoDAO<Libro> libroAccesoDao;
@@ -20,7 +20,7 @@ namespace LibreriaV3._1.Vista
         //Factura factura;
         //private List<LineaFactura> lineasFactura;
 
-        public BorrarFacturas()
+        public ConsultarFacturas()
         {
             InitializeComponent();
             InicializarVariables();

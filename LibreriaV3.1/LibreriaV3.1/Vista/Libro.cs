@@ -44,13 +44,13 @@ namespace LibreriaV3._1
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Util.EscribirDictionarySentenciasFichero();
-            ConexionJDBC.CerrarConexion();
+           
+            
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            ConexionJDBC.CerrarConexion();
+           
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)
@@ -64,7 +64,7 @@ namespace LibreriaV3._1
             txtMensaje.Text = "";
             if ((libro = RecogerDatosPantalla()) == null)
             {
-                txtMensaje.Text = "Rellenar todos los campos";
+                MessageBox.Show("Rellenar todos los campos");
             }
             else
             {
@@ -91,7 +91,8 @@ namespace LibreriaV3._1
             autor = txtAutor.Text;
             paginas = txtPaginas.Text;
             precio = txtPrecio.Text.Replace(",", ".");
-            precio = precio.Replace(" €","");
+            precio = precio.Replace("€","");
+            precio = precio.Trim();
             formatoUno = chkCartone.Checked ? chkCartone.Text : "N/A";
             formatoDos = chkRustica.Checked ? chkRustica.Text : "N/A";
             formatoTres = chkTapaDura.Checked ? chkTapaDura.Text : "N/A";
@@ -153,7 +154,7 @@ namespace LibreriaV3._1
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            this.Close();
         }
 
         private void lstLibros_SelectedIndexChanged(object sender, EventArgs e)
@@ -190,23 +191,31 @@ namespace LibreriaV3._1
 
         private void btnBaja_Click(object sender, EventArgs e)
         {
-            MsgBoxUtil.HackMessageBox("Borrado Virtual", "Borrar");
-            var result = MessageBox.Show("¿Cómo deseas borrar?", "¡Atención!", MessageBoxButtons.YesNoCancel,MessageBoxIcon.Asterisk);
-           //Borrado virtual
-            if (result == DialogResult.Yes)
+            if (lstLibros.SelectedItem != null)
             {
-                if (control.BorradoVirtual(lstLibros.SelectedItem))
+                MsgBoxUtil.HackMessageBox("Borrado Virtual", "Borrar");
+                var result = MessageBox.Show("¿Cómo deseas borrar?", "¡Atención!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Asterisk);
+                //Borrado virtual
+                if (result == DialogResult.Yes)
                 {
-                    txtMensaje.Text = "Borrado virtual satisfactorio";
-                    ObtenerTodosLibros();
+                    if (control.BorradoVirtual(lstLibros.SelectedItem))
+                    {
+                        txtMensaje.Text = "Borrado virtual satisfactorio";
+                        ObtenerTodosLibros();
+                    }
                 }
-            }else if(result == DialogResult.No)
+                else if (result == DialogResult.No)
+                {
+                    if (control.Borrar(lstLibros.SelectedItem))
+                    {
+                        txtMensaje.Text = "Libro borrado satisfactoriamente";
+                        ObtenerTodosLibros();
+                    }
+                }
+            }
+            else
             {
-                if (control.Borrar(lstLibros.SelectedItem))
-                {
-                    txtMensaje.Text = "Libro borrado satisfactoriamente";
-                    ObtenerTodosLibros();
-                }
+                MessageBox.Show("Seleccione un libro");
             }
         }
 
@@ -240,11 +249,17 @@ namespace LibreriaV3._1
         private void btnModificar_Click(object sender, EventArgs e)
         {
             TLibro libro = RecogerDatosPantalla();
-            libro.CodLibro = ((TLibro)lstLibros.SelectedItem).CodLibro;
-            if(control.Modificar(libro.CodLibro, libro))
+            if (libro != null)
             {
-                ObtenerTodosLibros();
-                txtMensaje.Text = "Libro modificado";
+                libro.CodLibro = ((TLibro)lstLibros.SelectedItem).CodLibro;
+                if (control.Modificar(libro.CodLibro, libro))
+                {
+                    ObtenerTodosLibros();
+                    txtMensaje.Text = "Libro modificado";
+                }
+            }
+            else{
+                MessageBox.Show("Compruebe los campos");
             }
            
 
