@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using LibreriaV3._1.Vista;
+using System;
 using System.Windows.Forms;
 
 namespace LibreriaV3._1
@@ -16,7 +14,7 @@ namespace LibreriaV3._1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Libro());
+            Application.Run(new Principal());
            
         }
     }
