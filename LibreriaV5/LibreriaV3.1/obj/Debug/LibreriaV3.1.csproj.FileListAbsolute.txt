@@ -1,0 +1,14 @@
+C:\Users\JAVI\Estudios\Ciclo_DAM\WorkSpaceVS\LibreriaV5\LibreriaV3.1\bin\Debug\LibreriaV3.1.exe.config
+C:\Users\JAVI\Estudios\Ciclo_DAM\WorkSpaceVS\LibreriaV5\LibreriaV3.1\bin\Debug\LibreriaV3.1.exe
+C:\Users\JAVI\Estudios\Ciclo_DAM\WorkSpaceVS\LibreriaV5\LibreriaV3.1\bin\Debug\LibreriaV3.1.pdb
+C:\Users\JAVI\Estudios\Ciclo_DAM\WorkSpaceVS\LibreriaV5\LibreriaV3.1\bin\Debug\MySql.Data.dll
+C:\Users\JAVI\Estudios\Ciclo_DAM\WorkSpaceVS\LibreriaV5\LibreriaV3.1\obj\Debug\LibreriaV3.1.csprojResolveAssemblyReference.cache
+C:\Users\JAVI\Estudios\Ciclo_DAM\WorkSpaceVS\LibreriaV5\LibreriaV3.1\obj\Debug\LibreriaV3._1.Vista.ConsultarFacturas.resources
+C:\Users\JAVI\Estudios\Ciclo_DAM\WorkSpaceVS\LibreriaV5\LibreriaV3.1\obj\Debug\LibreriaV3._1.Vista.InsertarFacturas.resources
+C:\Users\JAVI\Estudios\Ciclo_DAM\WorkSpaceVS\LibreriaV5\LibreriaV3.1\obj\Debug\LibreriaV3._1.Libro.resources
+C:\Users\JAVI\Estudios\Ciclo_DAM\WorkSpaceVS\LibreriaV5\LibreriaV3.1\obj\Debug\LibreriaV3._1.Properties.Resources.resources
+C:\Users\JAVI\Estudios\Ciclo_DAM\WorkSpaceVS\LibreriaV5\LibreriaV3.1\obj\Debug\LibreriaV3._1.Vista.Principal.resources
+C:\Users\JAVI\Estudios\Ciclo_DAM\WorkSpaceVS\LibreriaV5\LibreriaV3.1\obj\Debug\LibreriaV3.1.csproj.GenerateResource.Cache
+C:\Users\JAVI\Estudios\Ciclo_DAM\WorkSpaceVS\LibreriaV5\LibreriaV3.1\obj\Debug\LibreriaV3.1.exe
+C:\Users\JAVI\Estudios\Ciclo_DAM\WorkSpaceVS\LibreriaV5\LibreriaV3.1\obj\Debug\LibreriaV3.1.pdb
+C:\Users\JAVI\Estudios\Ciclo_DAM\WorkSpaceVS\LibreriaV5\LibreriaV3.1\obj\Debug\LibreriaV3._1.Vista.Clientes.resources
