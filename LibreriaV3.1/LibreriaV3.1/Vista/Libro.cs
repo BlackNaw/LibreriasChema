@@ -24,127 +24,124 @@ namespace LibreriaV3._1
             ObtenerTemas();
             ObtenerTodosLibros();
         }
-
-
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtMensaje_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            //VaciarPantalla();
-        }
-
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
-        {
-           
-            
-        }
-
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-           
-        }
-
         private void btnNuevo_Click(object sender, EventArgs e)
         {
             VaciarPantalla();
         }
 
-
         private void btnAlta_Click(object sender, EventArgs e)
         {
-            txtMensaje.Text = "";
-            if ((libro = RecogerDatosPantalla()) == null)
+            try
             {
-                MessageBox.Show("Rellenar todos los campos");
-            }
-            else
-            {
-                if (control.Buscar(libro.GetType(), libro.CodLibro) != null)
+                txtMensaje.Text = "";
+                if ((libro = RecogerDatosPantalla()) == null)
                 {
-                    txtMensaje.Text = "El libro ya existe";
+                    MessageBox.Show("Rellenar todos los campos");
                 }
                 else
                 {
-                    control.Insertar(libro);
-                    ObtenerTodosLibros();
-                    txtMensaje.Text = "Libro añadido con exito";
+                    if (control.Buscar(libro.GetType(), libro.CodLibro) != null)
+                    {
+                        txtMensaje.Text = "El libro ya existe";
+                    }
+                    else
+                    {
+                        control.Insertar(libro);
+                        ObtenerTodosLibros();
+                        txtMensaje.Text = "Libro añadido con exito";
+                    }
                 }
+                lstLibros.ClearSelected();
             }
-            lstLibros.ClearSelected();
-
+            catch (Errores error)
+            {
+                MessageBox.Show(error.Message);
+            }
         }
 
         private TLibro RecogerDatosPantalla()
         {
-            TLibro libro = null;
-            string titulo, autor, paginas, precio, formatoUno, formatoDos, formatoTres, estado, tema;
-            titulo = txtTitulo.Text;
-            autor = txtAutor.Text;
-            paginas = txtPaginas.Text;
-            precio = txtPrecio.Text.Replace(",", ".");
-            precio = precio.Replace("€","");
-            precio = precio.Trim();
-            formatoUno = chkCartone.Checked ? chkCartone.Text : "N/A";
-            formatoDos = chkRustica.Checked ? chkRustica.Text : "N/A";
-            formatoTres = chkTapaDura.Checked ? chkTapaDura.Text : "N/A";
-            tema = cbxTemas.SelectedItem.ToString();
-            if (rbNovedad.Checked)
+            try
             {
-                estado = "novedad";
-            }
-            else
-            {
-                estado = "reedicion";
-            }
+                TLibro libro = null;
+                string titulo, autor, paginas, precio, formatoUno, formatoDos, formatoTres, estado, tema;
+                titulo = txtTitulo.Text;
+                autor = txtAutor.Text;
+                paginas = txtPaginas.Text;
+                precio = txtPrecio.Text.Replace(".", ",");
+                precio = precio.Replace("€", "");
+                precio = precio.Trim();
+                formatoUno = chkCartone.Checked ? chkCartone.Text : "N/A";
+                formatoDos = chkRustica.Checked ? chkRustica.Text : "N/A";
+                formatoTres = chkTapaDura.Checked ? chkTapaDura.Text : "N/A";
+                tema = cbxTemas.SelectedItem.ToString();
+                if (rbNovedad.Checked)
+                {
+                    estado = "novedad";
+                }
+                else
+                {
+                    estado = "reedicion";
+                }
 
-            if (titulo.Count() != 0 && paginas.Count() != 0 && titulo.Count() != 0 && precio.Count() != 0)
-            {
-                libro = new TLibro(autor, titulo, tema, paginas, precio, formatoUno, formatoDos, formatoTres, estado);
+                if (titulo.Count() != 0 && paginas.Count() != 0 && titulo.Count() != 0 && precio.Count() != 0)
+                {
+                    libro = new TLibro(autor, titulo, tema, paginas, precio, formatoUno, formatoDos, formatoTres, estado);
+                }
+                return libro;
             }
-            return libro;
+            catch (Errores error)
+            {
+                MessageBox.Show(error.Message);
+                return null;
+            }
         }
 
         private void ObtenerTodosLibros()
         {
-            List<object> libros = new List<object>();
-            foreach (TLibro item in control.Obtener(new TLibro().GetType()))
+            try
             {
-                if (item.Borrado.Equals("0"))
+                List<object> libros = new List<object>();
+                foreach (TLibro item in control.Obtener(new TLibro().GetType()))
                 {
-                    libros.Add(item);
+                    if (item.Borrado.Equals("0"))
+                    {
+                        libros.Add(item);
+                    }
                 }
+                lstLibros.DataSource = libros;
+                lstLibros.ClearSelected();
+                VaciarPantalla();
             }
-            lstLibros.DataSource = libros;
-            lstLibros.ClearSelected();
-            VaciarPantalla();
+            catch (Errores error)
+            {
+                MessageBox.Show(error.Message);
+            }
         }
         private void ObtenerTemas()
         {
-            foreach (var item in control.ObtenerTemas())
+            try
             {
-                cbxTemas.Items.Add(item);
+                foreach (var item in control.ObtenerTemas())
+                {
+                    cbxTemas.Items.Add(item);
+                }
+                cbxTemas.SelectedIndex = 0;
             }
-            cbxTemas.SelectedIndex = 1 ;
-            
+            catch (Errores error)
+            {
+                MessageBox.Show(error.Message);
+            }
         }
 
         private void VaciarPantalla()
-        {   
+        {
             txtAutor.Text = "";
             txtMensaje.Text = "";
             txtPaginas.Text = "";
             txtPrecio.Text = "";
             txtTitulo.Text = "";
-            cbxTemas.Text= "";
+            cbxTemas.SelectedIndex = 0;
             rbNovedad.Checked = true;
             rbReedicion.Checked = false;
             chkCartone.Checked = false;
@@ -165,103 +162,136 @@ namespace LibreriaV3._1
             }
         }
 
-
         private void RellenarCampos(TLibro sender)
         {
-            txtAutor.Text = sender.Autor;
-            txtPaginas.Text = sender.Paginas;
-            txtPrecio.Text = sender.Precio + " €";
-            txtTitulo.Text = sender.Titulo;
-            cbxTemas.Text = sender.Tema;
-            if (sender.Estado.Equals("reedicion"))
+            try
             {
-                rbReedicion.Checked = true;
-                rbNovedad.Checked = false;
-            }
-            else
-            {
-                rbNovedad.Checked = true;
-                rbReedicion.Checked = false;
-            }
+                txtAutor.Text = sender.Autor;
+                txtPaginas.Text = sender.Paginas;
+                txtPrecio.Text = sender.Precio + " €";
+                txtTitulo.Text = sender.Titulo;
+                cbxTemas.Text = sender.Tema;
+                if (sender.Estado.Equals("reedicion"))
+                {
+                    rbReedicion.Checked = true;
+                    rbNovedad.Checked = false;
+                }
+                else
+                {
+                    rbNovedad.Checked = true;
+                    rbReedicion.Checked = false;
+                }
 
-            chkCartone.Checked = sender.Formatouno.Equals("Cartoné") ? true : false;
-            chkRustica.Checked = sender.Formatodos.Equals("Rústica") ? true : false; ;
-            chkTapaDura.Checked = sender.Formatotres.Equals("Tapa dura") ? true : false; ;
+                chkCartone.Checked = sender.Formatouno.Equals("Cartoné") ? true : false;
+                chkRustica.Checked = sender.Formatodos.Equals("Rústica") ? true : false;
+                chkTapaDura.Checked = sender.Formatotres.Equals("Tapa dura") ? true : false;
+            }
+            catch (Errores error)
+            {
+                MessageBox.Show(error.Message);
+            }
         }
 
         private void btnBaja_Click(object sender, EventArgs e)
         {
-            if (lstLibros.SelectedItem != null)
-            {
-                MsgBoxUtil.HackMessageBox("Borrado Virtual", "Borrar");
-                var result = MessageBox.Show("¿Cómo deseas borrar?", "¡Atención!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Asterisk);
-                //Borrado virtual
-                if (result == DialogResult.Yes)
+            try{
+                if (lstLibros.SelectedItem != null)
                 {
-                    if (control.BorradoVirtual(lstLibros.SelectedItem))
+                    MsgBoxUtil.HackMessageBox("Borrado Virtual", "Borrar");
+                    var result = MessageBox.Show("¿Cómo deseas borrar?", "¡Atención!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Asterisk);
+                    //Borrado virtual
+                    if (result == DialogResult.Yes)
                     {
-                        txtMensaje.Text = "Borrado virtual satisfactorio";
-                        ObtenerTodosLibros();
+                        if (control.BorradoVirtual(lstLibros.SelectedItem))
+                        {
+                            txtMensaje.Text = "Borrado virtual satisfactorio";
+                            ObtenerTodosLibros();
+                        }
+                    }
+                    else if (result == DialogResult.No)
+                    {
+                        if (control.Borrar(lstLibros.SelectedItem))
+                        {
+                            txtMensaje.Text = "Libro borrado satisfactoriamente";
+                            ObtenerTodosLibros();
+                        }
                     }
                 }
-                else if (result == DialogResult.No)
+                else
                 {
-                    if (control.Borrar(lstLibros.SelectedItem))
-                    {
-                        txtMensaje.Text = "Libro borrado satisfactoriamente";
-                        ObtenerTodosLibros();
-                    }
+                    MessageBox.Show("Seleccione un libro");
                 }
             }
-            else
+            catch (Errores error)
             {
-                MessageBox.Show("Seleccione un libro");
+                MessageBox.Show(error.Message);
             }
         }
 
         private void txtPaginas_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            try
             {
-                e.Handled = true;
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                {
+                    e.Handled = true;
+                }
+            }
+            catch (Errores error)
+            {
+                MessageBox.Show(error.Message);
             }
         }
 
         private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-      (e.KeyChar != '.') &&(e.KeyChar != ','))
+            try
             {
-                e.Handled = true;
-            }
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+          (e.KeyChar != '.') && (e.KeyChar != ','))
+                {
+                    e.Handled = true;
+                }
 
-            // only allow one decimal point
-            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
-            {
-                e.Handled = true;
+                // only allow one decimal point
+                if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+                {
+                    e.Handled = true;
+                }
+                if ((e.KeyChar == ',') && ((sender as TextBox).Text.IndexOf(',') > -1))
+                {
+                    e.Handled = true;
+                }
             }
-            if ((e.KeyChar == ',') && ((sender as TextBox).Text.IndexOf(',') > -1))
+            catch (Errores error)
             {
-                e.Handled = true;
+                MessageBox.Show(error.Message);
             }
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            TLibro libro = RecogerDatosPantalla();
-            if (libro != null)
+            try
             {
-                libro.CodLibro = ((TLibro)lstLibros.SelectedItem).CodLibro;
-                if (control.Modificar(libro.CodLibro, libro))
+                TLibro libro = RecogerDatosPantalla();
+                if (libro != null)
                 {
-                    ObtenerTodosLibros();
-                    txtMensaje.Text = "Libro modificado";
+                    libro.CodLibro = ((TLibro)lstLibros.SelectedItem).CodLibro;
+                    if (control.Modificar(libro.CodLibro, libro))
+                    {
+                        ObtenerTodosLibros();
+                        txtMensaje.Text = "Libro modificado";
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Compruebe los campos");
                 }
             }
-            else{
-                MessageBox.Show("Compruebe los campos");
+            catch (Errores error)
+            {
+                MessageBox.Show(error.Message);
             }
-           
 
 
         }

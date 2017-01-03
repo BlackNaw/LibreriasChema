@@ -30,7 +30,6 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.lblCodFactura = new System.Windows.Forms.Label();
             this.txtFecha = new System.Windows.Forms.DateTimePicker();
             this.btnInsertar = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -48,6 +47,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.lblTotal = new System.Windows.Forms.Label();
+            this.lblCodFactura = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCantidad)).BeginInit();
             this.SuspendLayout();
@@ -71,14 +71,6 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Nº Factura:";
             // 
-            // lblCodFactura
-            // 
-            this.lblCodFactura.AutoSize = true;
-            this.lblCodFactura.Location = new System.Drawing.Point(79, 16);
-            this.lblCodFactura.Name = "lblCodFactura";
-            this.lblCodFactura.Size = new System.Drawing.Size(0, 13);
-            this.lblCodFactura.TabIndex = 2;
-            // 
             // txtFecha
             // 
             this.txtFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
@@ -93,7 +85,7 @@
             this.btnInsertar.Name = "btnInsertar";
             this.btnInsertar.Size = new System.Drawing.Size(75, 23);
             this.btnInsertar.TabIndex = 9;
-            this.btnInsertar.Text = "Insertar";
+            this.btnInsertar.Text = "Guardar";
             this.btnInsertar.UseVisualStyleBackColor = true;
             this.btnInsertar.Click += new System.EventHandler(this.btnInsertar_Click);
             // 
@@ -147,7 +139,7 @@
             this.cmbLibros.FormattingEnabled = true;
             this.cmbLibros.Location = new System.Drawing.Point(60, 100);
             this.cmbLibros.Name = "cmbLibros";
-            this.cmbLibros.Size = new System.Drawing.Size(121, 21);
+            this.cmbLibros.Size = new System.Drawing.Size(156, 21);
             this.cmbLibros.TabIndex = 7;
             // 
             // cmbClientes
@@ -155,7 +147,7 @@
             this.cmbClientes.FormattingEnabled = true;
             this.cmbClientes.Location = new System.Drawing.Point(60, 52);
             this.cmbClientes.Name = "cmbClientes";
-            this.cmbClientes.Size = new System.Drawing.Size(121, 21);
+            this.cmbClientes.Size = new System.Drawing.Size(156, 21);
             this.cmbClientes.TabIndex = 6;
             // 
             // txtCantidad
@@ -177,18 +169,18 @@
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(365, 97);
+            this.btnOk.Location = new System.Drawing.Point(345, 97);
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(40, 23);
+            this.btnOk.Size = new System.Drawing.Size(60, 23);
             this.btnOk.TabIndex = 4;
-            this.btnOk.Text = "Ok";
+            this.btnOk.Text = "Insertar";
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(210, 108);
+            this.label6.Location = new System.Drawing.Point(222, 103);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(52, 13);
             this.label6.TabIndex = 3;
@@ -206,7 +198,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(222, 59);
+            this.label4.Location = new System.Drawing.Point(234, 59);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(40, 13);
             this.label4.TabIndex = 1;
@@ -239,15 +231,24 @@
             this.lblTotal.Size = new System.Drawing.Size(0, 13);
             this.lblTotal.TabIndex = 12;
             // 
+            // lblCodFactura
+            // 
+            this.lblCodFactura.AutoSize = true;
+            this.lblCodFactura.Location = new System.Drawing.Point(79, 16);
+            this.lblCodFactura.Name = "lblCodFactura";
+            this.lblCodFactura.Size = new System.Drawing.Size(61, 13);
+            this.lblCodFactura.TabIndex = 13;
+            this.lblCodFactura.Text = "codFactura";
+            // 
             // InsertarFacturas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(434, 342);
+            this.Controls.Add(this.lblCodFactura);
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.lblCodFactura);
             this.Controls.Add(this.txtFecha);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnInsertar);
@@ -273,7 +274,6 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label lblCodFactura;
         private System.Windows.Forms.DateTimePicker txtFecha;
         private System.Windows.Forms.Button btnInsertar;
         private System.Windows.Forms.DataGridView dataGridView1;
@@ -291,5 +291,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Subtotal;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label lblTotal;
+        private System.Windows.Forms.Label lblCodFactura;
     }
 }

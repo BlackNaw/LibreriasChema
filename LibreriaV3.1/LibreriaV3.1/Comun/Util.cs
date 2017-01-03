@@ -11,7 +11,7 @@ namespace LibreriaV3._1.Comun
     public static class Util
     {
         private static string ruta = "sql.txt";
-        private static Dictionary<string, string> SENTENCIAS;
+        private static IDictionary<string, string> SENTENCIAS;
         static BinaryFormatter serializer = new BinaryFormatter();
 
 
@@ -54,7 +54,7 @@ namespace LibreriaV3._1.Comun
 
         public static void EscribirDictionarySentenciasFichero()
         {
-            if (ComprobarArchivo()&&SENTENCIAS!=null&&SENTENCIAS.Count()>0)
+            if (ComprobarArchivo()&&SENTENCIAS!=null)
             {
                 using (var stream = File.OpenWrite(ruta))
                 {

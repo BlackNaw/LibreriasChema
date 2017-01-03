@@ -115,7 +115,7 @@
             this.cmbFactura.FormattingEnabled = true;
             this.cmbFactura.Location = new System.Drawing.Point(84, 55);
             this.cmbFactura.Name = "cmbFactura";
-            this.cmbFactura.Size = new System.Drawing.Size(121, 21);
+            this.cmbFactura.Size = new System.Drawing.Size(307, 21);
             this.cmbFactura.TabIndex = 22;
             this.cmbFactura.SelectedIndexChanged += new System.EventHandler(this.cmbFactura_SelectedIndexChanged_1);
             // 
@@ -181,7 +181,7 @@
             this.lblFecha.Size = new System.Drawing.Size(0, 13);
             this.lblFecha.TabIndex = 29;
             // 
-            // BorrarFacturas
+            // ConsultarFacturas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -197,7 +197,7 @@
             this.Controls.Add(this.cmbFactura);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label4);
-            this.Name = "BorrarFacturas";
+            this.Name = "ConsultarFacturas";
             this.Text = "BorrarFacturas";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);

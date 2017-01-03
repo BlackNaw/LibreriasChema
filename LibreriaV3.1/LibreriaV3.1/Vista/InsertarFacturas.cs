@@ -9,125 +9,142 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using LibreriaV3._1.Negocio;
 using LibreriaV3._1;
+using LibreriaV3._1.Modelo;
+using LibreriaV3._1.Comun;
 
 namespace LibreriaV3._1.Vista
 {
     public partial class InsertarFacturas : Form
     {
-        //ControlAccesoDAO<Cliente> clienteAccesoDao;
-        //ControlAccesoDAO<Libro> libroAccesoDao;
-        //ControlAccesoDAO<Factura> facturaAccesoDao;
-        //Factura factura;
-        //private List<LineaFactura> lineasFactura;
+
+        private ControlAccesoDAO<object> control = new ControlAccesoDAO<object>();
+        private List<TLineaFactura> listLineasFacturas = new List<TLineaFactura>();
         public InsertarFacturas()
         {
             InitializeComponent();
-            InicializarVariables();
             LlenarCombos();
+            lblCodFactura.Text = Util.GenerarCodigo(new TFactura().GetType());
         }
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            Libro libroActual = (Libro)cmbLibros.SelectedItem;
-            if (libroActual != null)
+            try
             {
-                int cantidad = (int)txtCantidad.Value;
-                bool encontrado = false;
-                //foreach (LineaFactura linea in factura.LineasFactura)
-                //{
-                //    if (linea.Titulo.Equals(libroActual.Titulo))
-                //    {
-                //        linea.Cantidad += cantidad;
-                //        encontrado = true;
-                //        break;
-                //    }
-                //}
-                if (!encontrado)
+                cmbClientes.Enabled = false;
+                TLibro libro = (TLibro)cmbLibros.SelectedItem;
+                TLineaFactura lineaFactura = new TLineaFactura(lblCodFactura.Text, libro.Titulo, Convert.ToString(txtCantidad.Value), Convert.ToString(Convert.ToDecimal(libro.Precio) * txtCantidad.Value));
+                if (!listLineasFacturas.Contains(lineaFactura))
                 {
-                    //factura.LineasFactura.Add(new LineaFactura()
-                    //{
-                    //    Titulo = libroActual.Titulo,
-                    //    Cantidad = cantidad,
-                    //    Precio = libroActual.Precio,
-                    //});
+                    listLineasFacturas.Add(lineaFactura);
+                    dataGridView1.Rows.Add(
+                    new object[]
+                    {
+                        lineaFactura.Libro,
+                        lineaFactura.Cantidad,
+                        libro.Precio,
+                        lineaFactura.Total,
+                    });
+
                 }
-                RefrescarLineas();
+                else
+                    ActualizarExistente(libro, lineaFactura);
+                decimal total = 0;
+                foreach (TLineaFactura item in listLineasFacturas)
+                {
+                    total += decimal.Parse(item.Total);
+                }
+
+                lblTotal.Text = Convert.ToString(total);
             }
+            catch (Errores error)
+            {
+                MessageBox.Show(error.Message);
+            }
+        }
+
+        private void ActualizarExistente(TLibro libro, TLineaFactura lineaFactura)
+        {
+            lineaFactura.Cantidad = Convert.ToString(int.Parse(listLineasFacturas[listLineasFacturas.IndexOf(lineaFactura)].Cantidad) + txtCantidad.Value);
+            listLineasFacturas[listLineasFacturas.IndexOf(lineaFactura)].Cantidad = lineaFactura.Cantidad;
+            lineaFactura.Total = Convert.ToString(int.Parse(lineaFactura.Cantidad) * decimal.Parse(libro.Precio));
+            listLineasFacturas[listLineasFacturas.IndexOf(lineaFactura)].Total = lineaFactura.Total;
+            dataGridView1["Cantidad", listLineasFacturas.IndexOf(lineaFactura)].Value = lineaFactura.Cantidad;
+            dataGridView1["Subtotal", listLineasFacturas.IndexOf(lineaFactura)].Value = lineaFactura.Total;
         }
 
         private void btnInsertar_Click(object sender, EventArgs e)
         {
-            string codigo = lblCodFactura.Text;
-            //Cliente cliente = (Cliente)cmbClientes.SelectedItem;
-            //factura.CodFactura = codigo;
-            //factura.Dni = cliente.Dni;
-            //factura.Fecha = txtFecha.Value;
-            //foreach (var linea in factura.LineasFactura)
-            //{
-            //    linea.CodFactura = codigo;
-            //}
-            //facturaAccesoDao.Insertar(factura);
-            MessageBox.Show("Factura añadida con éxito");
-            //lineasFactura.Clear();
-            LimpiarPantalla();
+            try { 
+            TFactura factura = new TFactura(lblCodFactura.Text, ((TCliente)cmbClientes.SelectedItem).Nombre + " " + ((TCliente)cmbClientes.SelectedItem).Apellidos, txtFecha.Text);
+            if (listLineasFacturas.Count == 0)
+            {
+                MessageBox.Show("Añade elementos a la factura");
+            }
+            else
+            {
+                control.Insertar(factura);
+                foreach (TLineaFactura item in listLineasFacturas)
+                {
+                    control.Insertar(item);
+                }
+            }
+            cmbClientes.Enabled = true;
+            RefrescarLineas();
+            }
+            catch (Errores error)
+            {
+                MessageBox.Show(error.Message);
+            }
         }
 
         private void RefrescarLineas()
         {
-            float contador = 0;
             dataGridView1.Rows.Clear();
-            //foreach (LineaFactura linea in factura.LineasFactura)
-            //{
-            //    dataGridView1.Rows.Add(
-            //        new object[]
-            //        {
-            //            linea.Titulo,
-            //            linea.Cantidad,
-            //            linea.Precio,
-            //            linea.Cantidad*linea.Precio
-            //        });
-            //    contador += linea.Cantidad*linea.Precio;
-            //}
-            lblTotal.Text = contador + " €";
-        }
-
-        private void LlenarCombos()
-        {
-            //List<Cliente> clientes = clienteAccesoDao.Obtener();
-            //List<Libro> libros = libroAccesoDao.Obtener();
-
-            //foreach (var cliente in clientes)
-            //{
-            //    cmbClientes.Items.Add(cliente);
-            //}
-
-            //foreach (var libro in libros)
-            //{
-            //    cmbLibros.Items.Add(libro);
-            //}
-
-            //cmbClientes.SelectedIndex = 0;
-            //cmbLibros.SelectedIndex = 0;
-        }
-
-        public void LimpiarPantalla()
-        {
-            dataGridView1.Rows.Clear();
-            InicializarVariables();
             cmbClientes.SelectedIndex = 0;
             cmbLibros.SelectedIndex = 0;
             txtCantidad.Value = 1;
             txtFecha.Value = DateTime.Today;
+            listLineasFacturas.Clear();
+            lblCodFactura.Text = Util.GenerarCodigo(new TFactura().GetType());
         }
 
-        public void InicializarVariables()
+        private void LlenarCombos()
         {
-            //clienteAccesoDao = new ControlAccesoDAO<Cliente>();
-            //libroAccesoDao = new ControlAccesoDAO<Libro>();
-            //facturaAccesoDao = new ControlAccesoDAO<Factura>();
-            //factura = new Factura();
-            //lineasFactura = new List<LineaFactura>();
-            //lblCodFactura.Text = facturaAccesoDao.ObtenerSiguienteId(factura);
+            try { 
+            foreach (TCliente cliente in control.Obtener(new TCliente().GetType()))
+            {
+                if (cliente.Borrado.Equals("0"))
+                {
+                    cmbClientes.Items.Add(cliente);
+                }
+            }
+
+            foreach (TLibro libro in control.Obtener(new TLibro().GetType()))
+            {
+                if (libro.Borrado.Equals("0"))
+                {
+                    cmbLibros.Items.Add(libro);
+                }
+            }
+            if (cmbClientes != null && cmbClientes.Items.Count > 0)
+                cmbClientes.SelectedIndex = 0;
+            if (cmbLibros != null && cmbLibros.Items.Count > 0)
+                cmbLibros.SelectedIndex = 0;
+            }
+            catch (Errores error)
+            {
+                MessageBox.Show(error.Message);
+            }
+        }
+
+        public void LimpiarPantalla()
+        {
+
+            dataGridView1.Rows.Clear();
+            cmbClientes.SelectedIndex = 0;
+            cmbLibros.SelectedIndex = 0;
+            txtCantidad.Value = 1;
+            txtFecha.Value = DateTime.Today;
         }
     }
 }

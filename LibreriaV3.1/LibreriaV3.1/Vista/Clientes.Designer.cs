@@ -64,7 +64,6 @@ namespace LibreriaV3._1.Vista
             this.label1.Size = new System.Drawing.Size(250, 57);
             this.label1.TabIndex = 0;
             this.label1.Text = "CLIENTES";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -86,7 +85,6 @@ namespace LibreriaV3._1.Vista
             this.txtMensaje.Name = "txtMensaje";
             this.txtMensaje.Size = new System.Drawing.Size(232, 26);
             this.txtMensaje.TabIndex = 2;
-            this.txtMensaje.TextChanged += new System.EventHandler(this.txtMensaje_TextChanged);
             // 
             // txtNombre
             // 
@@ -136,7 +134,6 @@ namespace LibreriaV3._1.Vista
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(242, 26);
             this.txtDireccion.TabIndex = 8;
-            this.txtDireccion.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecio_KeyPress);
             // 
             // label5
             // 
@@ -148,7 +145,6 @@ namespace LibreriaV3._1.Vista
             this.label5.Size = new System.Drawing.Size(79, 20);
             this.label5.TabIndex = 7;
             this.label5.Text = "Dirección:";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // txtDNI
             // 
@@ -159,7 +155,6 @@ namespace LibreriaV3._1.Vista
             this.txtDNI.Name = "txtDNI";
             this.txtDNI.Size = new System.Drawing.Size(242, 26);
             this.txtDNI.TabIndex = 10;
-            this.txtDNI.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPaginas_KeyPress);
             // 
             // label6
             // 
@@ -263,7 +258,6 @@ namespace LibreriaV3._1.Vista
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(242, 26);
             this.txtEmail.TabIndex = 8;
-            this.txtEmail.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecio_KeyPress);
             // 
             // email
             // 
@@ -300,9 +294,6 @@ namespace LibreriaV3._1.Vista
             this.Name = "Clientes";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Clientes";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

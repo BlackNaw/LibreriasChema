@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Comun\Errores.cs" />
     <Compile Include="Comun\MsgBoxUtil.cs" />
     <Compile Include="Comun\Util.cs" />
     <Compile Include="Negocio\TCliente.cs" />

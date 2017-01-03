@@ -70,7 +70,6 @@
             this.label1.Size = new System.Drawing.Size(255, 57);
             this.label1.TabIndex = 0;
             this.label1.Text = "LIBRERIA";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -92,7 +91,6 @@
             this.txtMensaje.Name = "txtMensaje";
             this.txtMensaje.Size = new System.Drawing.Size(232, 26);
             this.txtMensaje.TabIndex = 2;
-            this.txtMensaje.TextChanged += new System.EventHandler(this.txtMensaje_TextChanged);
             // 
             // txtTitulo
             // 
@@ -399,9 +397,6 @@
             this.Name = "Libro";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Libros";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.Formato.ResumeLayout(false);
             this.Formato.PerformLayout();
             this.Estado.ResumeLayout(false);

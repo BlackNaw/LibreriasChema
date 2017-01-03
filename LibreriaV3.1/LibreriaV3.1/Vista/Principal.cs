@@ -9,8 +9,8 @@ namespace LibreriaV3._1.Vista
     {
         public Principal()
         {
-            AccesoBD accesoBD = new AccesoBD();
             InitializeComponent();
+            Util.RellenarDictionarySentencias();
         }
 
         

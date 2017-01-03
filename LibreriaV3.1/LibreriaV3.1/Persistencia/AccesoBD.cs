@@ -19,7 +19,6 @@ namespace LibreriaV3._1.Persistencia
         public AccesoBD()
         {
             connection = ConexionJDBC.AbrirConexion();
-            Util.RellenarDictionarySentencias();
         }
 
         public bool Insertar(string sql, object objecto, string antiguo)
@@ -32,13 +31,13 @@ namespace LibreriaV3._1.Persistencia
                 int index = 1;
                 foreach (string valor in map.Values)
                 {
-                    comando.Parameters.AddWithValue("@"+index++, valor);
+                    comando.Parameters.AddWithValue("@" + index++, valor);
                 }
                 if (sql.Contains("UPDATE"))
                 {
                     comando.Parameters.AddWithValue("@" + index, antiguo);
                 }
-                
+
             }
             catch (Exception) { throw; }
             return comando.ExecuteNonQuery() > 0;

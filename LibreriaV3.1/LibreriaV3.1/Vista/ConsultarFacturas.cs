@@ -9,90 +9,106 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using LibreriaV3._1.Negocio;
 using LibreriaV3._1;
+using LibreriaV3._1.Comun;
 
 namespace LibreriaV3._1.Vista
 {
     public partial class ConsultarFacturas : Form
     {
-        //ControlAccesoDAO<Cliente> clienteAccesoDao;
-        ControlAccesoDAO<Libro> libroAccesoDao;
-        //ControlAccesoDAO<Factura> facturaAccesoDao;
-        //Factura factura;
-        //private List<LineaFactura> lineasFactura;
+        ControlAccesoDAO<object> control = new ControlAccesoDAO<object>();
+        List<object> listLineasFactura;
 
         public ConsultarFacturas()
         {
             InitializeComponent();
-            InicializarVariables();
             LlenarCombo();
         }
 
         private void btnEliminar_Click_1(object sender, EventArgs e)
         {
-            //if (facturaAccesoDao.BorradoVirtual(factura.CodFactura))
-                MessageBox.Show("Factura Eliminada.");
-            LimpiarPantalla();
-            LlenarCombo();
+            try
+            {
+                var result = MessageBox.Show("¿Estás seguro de borrar?", "¡Atención!", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
+                if (result == DialogResult.Yes)
+                {
+                    control.BorradoVirtual(cmbFactura.SelectedItem);
+                }
+                LlenarCombo();
+                LimpiarPantalla();
+            }
+            catch (Errores error)
+            {
+                MessageBox.Show(error.Message);
+            }
         }
 
         private void cmbFactura_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-            LimpiarPantalla();
-            //factura = facturaAccesoDao.Buscar(cmbFactura.SelectedItem.ToString());
-            //lblCliente.Text = clienteAccesoDao.Buscar(factura.Dni).ToString();
-            //lblFecha.Text = factura.Fecha.ToString().Substring(0, 10);
-            //lineasFactura = new ControlAccesoDAO<LineaFactura>().Obtener(cmbFactura.SelectedItem.ToString());
-            //factura.LineasFactura = lineasFactura;
-            RefrescarLineas();
+            try
+            {
+                LimpiarPantalla();
+                TFactura factura = (TFactura)cmbFactura.SelectedItem;
+                lblCliente.Text = factura.Cliente;
+                lblFecha.Text = factura.FechaFactura;
+                listLineasFactura = control.Buscar(new TLineaFactura().GetType(), "CodFactura", factura.CodFactura);
+                RefrescarLineas();
+            }
+            catch (Errores error)
+            {
+                MessageBox.Show(error.Message);
+            }
         }
 
         private void LlenarCombo()
         {
-            cmbFactura.Items.Clear();
-            //List<Factura> facturas = facturaAccesoDao.Obtener();
+            try
+            {
+                cmbFactura.Items.Clear();
+                foreach (TFactura factura in control.Obtener(new TFactura().GetType()))
+                {
+                    if (factura.Borrado.Equals("0"))
+                        cmbFactura.Items.Add(factura);
+                }
+            }
+            catch (Errores error)
+            {
+                MessageBox.Show(error.Message);
+            }
 
-            //foreach (var factura in facturas)
-            //{
-            //    cmbFactura.Items.Add(factura.CodFactura);
-            //}
-
-            //cmbFactura.SelectedIndex = 0;
         }
 
         private void RefrescarLineas()
         {
-            float contador = 0;
-            dataGridView1.Rows.Clear();
-            //foreach (LineaFactura linea in factura.LineasFactura)
-            //{
-                //dataGridView1.Rows.Add(
-                //    new object[]
-                //    {
-                //        linea.Titulo,
-                //        linea.Cantidad,
-                //        linea.Precio,
-                //        linea.Cantidad*linea.Precio
-                //    });
-                //contador += linea.Cantidad * linea.Precio;
-            //}
-            lblTotal.Text = contador + " €";
+            try
+            {
+                decimal contador = 0;
+                dataGridView1.Rows.Clear();
+                foreach (TLineaFactura linea in listLineasFactura)
+                {
+                    dataGridView1.Rows.Add(
+                        new object[]
+                        {
+                        linea.Libro,
+                        linea.Cantidad,
+                        Convert.ToString(decimal.Parse(linea.Total)/int.Parse(linea.Cantidad)),
+                        linea.Total
+                        });
+                    contador += decimal.Parse(linea.Total);
+                }
+                lblTotal.Text = contador + " €";
+            }
+            catch (Errores error)
+            {
+                MessageBox.Show(error.Message);
+            }
         }
 
         public void LimpiarPantalla()
         {
             dataGridView1.Rows.Clear();
-            InicializarVariables();
             lblCliente.Text = "";
             lblFecha.Text = "";
         }
 
-        public void InicializarVariables()
-        {
-            //clienteAccesoDao = new ControlAccesoDAO<Cliente>();
-            libroAccesoDao = new ControlAccesoDAO<Libro>();
-            //facturaAccesoDao = new ControlAccesoDAO<Factura>();
-            //factura = new Factura();
-            //lineasFactura = new List<LineaFactura>();
-        }
     }
 }

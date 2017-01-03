@@ -8,13 +8,11 @@ namespace LibreriaV3._1.Negocio
 {
     class TLineaFactura
     {
+
         public string CodFactura { get; set; }
-
-        public string Libro{ get; set; }
-
+        public string Libro { get; set; }
         public string Cantidad { get; set; }
-
-        public string Total{ get; set; }
+        public string Total { get; set; }
 
         public TLineaFactura(string codFactura, string libro, string cantidad, string total)
         {
@@ -23,12 +21,18 @@ namespace LibreriaV3._1.Negocio
             Cantidad = cantidad;
             Total = total;
         }
+        public TLineaFactura()
+        {
 
-        public TLineaFactura() { }
+        }
 
         public override string ToString()
         {
-            return Libro+" - "+Cantidad+" - "+Total;
+            return Libro+" "+Cantidad+" "+Total;
+        }
+        public override bool Equals(object obj)
+        {
+            return ((TLineaFactura)obj).Libro == Libro;
         }
     }
 }

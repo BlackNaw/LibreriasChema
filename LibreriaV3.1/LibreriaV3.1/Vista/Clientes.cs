@@ -1,4 +1,5 @@
-﻿using LibreriaV3._1.Negocio;
+﻿using LibreriaV3._1.Comun;
+using LibreriaV3._1.Negocio;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,59 +24,65 @@ namespace LibreriaV3._1.Vista
             ObtenerTodosClientes();
         }
 
-      
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-        }
-
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
-        {
-        }
-
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-        }
-
         private void lstLibros_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (lstClientes.SelectedItem != null)
+            try
             {
-                RellenarCampos((TCliente)lstClientes.SelectedItem);
+                if (lstClientes.SelectedItem != null)
+                {
+                    RellenarCampos((TCliente)lstClientes.SelectedItem);
+                }
+            }
+            catch (Errores error)
+            {
+                MessageBox.Show(error.Message);
             }
         }
 
         private void RellenarCampos(TCliente cliente)
         {
-            txtNombre.Text = cliente.Nombre;
-            txtApellidos.Text = cliente.Apellidos;
-            txtDireccion.Text = cliente.Direccion;
-            txtEmail.Text = cliente.Email;
-            txtDNI.Text = cliente.DNI;
-           
+            try
+            {
+                txtNombre.Text = cliente.Nombre;
+                txtApellidos.Text = cliente.Apellidos;
+                txtDireccion.Text = cliente.Direccion;
+                txtEmail.Text = cliente.Email;
+                txtDNI.Text = cliente.DNI;
+            }
+            catch (Errores error)
+            {
+                MessageBox.Show(error.Message);
+            }
         }
 
         private void btnAlta_Click(object sender, EventArgs e)
         {
-            txtMensaje.Text = "";
-            if ((cliente = RecogerDatosPantalla()) == null)
+            try
             {
-                MessageBox.Show("Rellenar todos los campos");
-            }
-            else
-            {
-                if (control.Buscar(cliente.GetType(), cliente.CodCliente) != null)
+                txtMensaje.Text = "";
+                if ((cliente = RecogerDatosPantalla()) == null)
                 {
-                    txtMensaje.Text = "El cliente ya existe";
+                    MessageBox.Show("Rellenar todos los campos");
                 }
                 else
                 {
-                    control.Insertar(cliente);
-                    ObtenerTodosClientes();
-                    txtMensaje.Text = "Cliente añadido con exito";
+                    if (control.Buscar(cliente.GetType(), cliente.CodCliente) != null)
+                    {
+                        txtMensaje.Text = "El cliente ya existe";
+                    }
+                    else
+                    {
+                        control.Insertar(cliente);
+                        ObtenerTodosClientes();
+                        txtMensaje.Text = "Cliente añadido con exito";
+                    }
                 }
+                lstClientes.ClearSelected();
             }
-            lstClientes.ClearSelected();
+            catch (Errores error)
+            {
+                MessageBox.Show(error.Message);
+            }
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)
@@ -85,50 +92,63 @@ namespace LibreriaV3._1.Vista
 
         private void btnBaja_Click(object sender, EventArgs e)
         {
-
-            if (lstClientes.SelectedItem != null)
+            try
             {
-                MsgBoxUtil.HackMessageBox("Borrado Virtual", "Borrar");
-                var result = MessageBox.Show("¿Cómo deseas borrar?", "¡Atención!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Asterisk);
-                //Borrado virtual
-                if (result == DialogResult.Yes)
+                if (lstClientes.SelectedItem != null)
                 {
-                    if (control.BorradoVirtual(lstClientes.SelectedItem))
+                    MsgBoxUtil.HackMessageBox("Borrado Virtual", "Borrar");
+                    var result = MessageBox.Show("¿Cómo deseas borrar?", "¡Atención!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Asterisk);
+                    //Borrado virtual
+                    if (result == DialogResult.Yes)
                     {
-                        txtMensaje.Text = "Borrado virtual satisfactorio";
-                        ObtenerTodosClientes();
+                        if (control.BorradoVirtual(lstClientes.SelectedItem))
+                        {
+                            txtMensaje.Text = "Borrado virtual satisfactorio";
+                            ObtenerTodosClientes();
+                        }
+                    }
+                    else if (result == DialogResult.No)
+                    {
+                        if (control.Borrar(lstClientes.SelectedItem))
+                        {
+                            txtMensaje.Text = "Cliente borrado satisfactoriamente";
+                            ObtenerTodosClientes();
+                        }
                     }
                 }
-                else if (result == DialogResult.No)
+                else
                 {
-                    if (control.Borrar(lstClientes.SelectedItem))
-                    {
-                        txtMensaje.Text = "Cliente borrado satisfactoriamente";
-                        ObtenerTodosClientes();
-                    }
+                    MessageBox.Show("Seleccione un cliente");
                 }
             }
-            else
+            catch (Errores error)
             {
-                MessageBox.Show("Seleccione un cliente");
+                MessageBox.Show(error.Message);
             }
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            TCliente cliente = RecogerDatosPantalla();
-            if (cliente != null)
+            try
             {
-                cliente.CodCliente = ((TCliente)lstClientes.SelectedItem).CodCliente;
-                if (control.Modificar(cliente.CodCliente, cliente))
+                TCliente cliente = RecogerDatosPantalla();
+                if (cliente != null)
                 {
-                    ObtenerTodosClientes();
-                    txtMensaje.Text = "Cliente modificado";
+                    cliente.CodCliente = ((TCliente)lstClientes.SelectedItem).CodCliente;
+                    if (control.Modificar(cliente.CodCliente, cliente))
+                    {
+                        ObtenerTodosClientes();
+                        txtMensaje.Text = "Cliente modificado";
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Compruebe los campos");
                 }
             }
-            else
+            catch (Errores error)
             {
-                MessageBox.Show("Compruebe los campos");
+                MessageBox.Show(error.Message);
             }
         }
 
@@ -137,41 +157,26 @@ namespace LibreriaV3._1.Vista
             this.Close();
         }
 
-        private void txtPaginas_KeyPress(object sender, KeyPressEventArgs e)
-        {
-        }
-
-        private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
-        {
-        }
-
-        private void txtMensaje_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void ObtenerTodosClientes()
         {
-
-            List<object> clientes = new List<object>();
-            foreach (TCliente item in control.Obtener(new TCliente().GetType()))
+            try
             {
-                if (item.Borrado.Equals("0"))
+                List<object> clientes = new List<object>();
+                foreach (TCliente item in control.Obtener(new TCliente().GetType()))
                 {
-                    clientes.Add(item);
+                    if (item.Borrado.Equals("0"))
+                    {
+                        clientes.Add(item);
+                    }
                 }
+                lstClientes.DataSource = clientes;
+                lstClientes.ClearSelected();
+                VaciarPantalla();
             }
-            lstClientes.DataSource = clientes;
-            lstClientes.ClearSelected();
-            VaciarPantalla();
+            catch (Errores error)
+            {
+                MessageBox.Show(error.Message);
+            }
         }
         private void VaciarPantalla()
         {
@@ -181,24 +186,32 @@ namespace LibreriaV3._1.Vista
             txtDNI.Text = "";
             txtEmail.Text = "";
             txtMensaje.Text = "";
-           
+
         }
 
         private TCliente RecogerDatosPantalla()
         {
-            TCliente libro = null;
-            string nombre, apellidos, dni, direccion, email;
-            nombre = txtNombre.Text;
-            apellidos = txtApellidos.Text;
-            dni = txtDNI.Text;
-            direccion= txtDireccion.Text;
-            email = txtEmail.Text;
-           
-            if (nombre.Count() != 0 && apellidos.Count() != 0 && dni.Count() != 0 && direccion.Count() != 0 && email.Count() != 0)
+            try
             {
-                libro = new TCliente(nombre, apellidos, dni, direccion, email);
-            }
+                TCliente libro = null;
+                string nombre, apellidos, dni, direccion, email;
+                nombre = txtNombre.Text;
+                apellidos = txtApellidos.Text;
+                dni = txtDNI.Text;
+                direccion = txtDireccion.Text;
+                email = txtEmail.Text;
+
+                if (nombre.Count() != 0 && apellidos.Count() != 0 && dni.Count() != 0 && direccion.Count() != 0 && email.Count() != 0)
+                {
+                    libro = new TCliente(nombre, apellidos, dni, direccion, email);
+                }
             return libro;
+            }
+            catch (Errores error)
+            {
+                MessageBox.Show(error.Message);
+                return null;
+            }
         }
     }
 }

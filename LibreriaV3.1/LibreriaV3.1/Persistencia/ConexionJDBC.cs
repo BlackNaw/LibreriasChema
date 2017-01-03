@@ -47,7 +47,8 @@ namespace LibreriaV3._1.Persistencia
 
         public static void CerrarConexion()
         {
-          connection.Close();
+            if(connection!=null) connection.Close();
+            
         }
     }
 }
