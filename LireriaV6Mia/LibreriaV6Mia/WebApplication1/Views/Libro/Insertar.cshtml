@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Alta";
+}
+
+
+    <link rel="stylesheet" href="~/Content/css/styleAlta.css">
+
+        <div id="form-main">
+            <div id="form-div">
+                <form class="form" method="post">
+                    <p class="name" title="Título">
+                        <input name="Titulo" type="text" maxlength="30" required = ""  class="feedback-input" placeholder="Título" id="titulo" />
+                    </p>
+                    <p class="paswd" title="Autor">
+                        <input name="Autor" type="text" maxlength="30" minlength="5" required = "" class="feedback-input"  placeholder="Autor" id="autor" />
+                    </p>
+                    <p class="nombre" title="Tema">
+                        <select name="Tema" class="feedback-input" id="tema">
+                             @foreach (string tema in Model)
+                            {
+                                <option value="@tema">@tema</option>
+                            }
+                        </select>
+                    </p>
+                    <p class="cif">
+                        <input name="Paginas" type="text"  required = "" class="feedback-input"  placeholder="Páginas" id="paginas"/>
+                    </p>
+                     <p class="cif">
+                        <input name="Precio" type="text"  required = "" class="feedback-input"  placeholder="Precio" id="precio"/>
+                    </p>
+                    <fieldset>
+                        <legend style="">Formato:</legend>
+                            <input type="checkbox" name="Formatouno" value="cantone"/>Cartoné <br>
+                            <input type="checkbox" name="Formatodos" value="rustica"/>Rústica<br>
+                            <input type="checkbox" name="Formatotres" value="tapadura"/>Tapa Dura<br>
+                    </fieldset>
+                     <fieldset>
+                        <legend>Estado: </legend>
+                        <input type="radio"  name="Estado" value="novedad" checked/>Novedad<br />
+                        <input type="radio"  name="Estado" value="reedicion" />Reedición<br />
+                    </fieldset>
+                    <br>
+                    <div class="submit">
+                        <input name ="boton" type="submit" value="Registrar"  class="boton" id="button-blue"/>
+                        <div class="ease"></div>
+                    </div>
+                    <br>
+                    <div class="submit">
+                        <input type="reset" value="Borrar Campos" class="boton" id="button-reset">
+                        <div class="ease"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+

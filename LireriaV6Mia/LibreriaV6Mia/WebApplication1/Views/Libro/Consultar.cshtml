@@ -1,0 +1,55 @@
+﻿@model List<LibreriaV3._1.Modelo.TLibro>
+
+@{
+    ViewBag.Title = "Consultar";
+}
+
+
+    <link rel="stylesheet" href="~/Content/css/styleConsulta.css">
+
+ <div id="notebooks" ng-app="notebooks" ng-controller="NotebookListCtrl">
+        <ul id="notebook_ul">
+               @foreach (var libro in Model)
+            {
+            <li  class="campo" id="campo" onclick=obtnerLibro('@((libro.CodLibro).Replace(' ','_'))','@((libro.Titulo).Replace(' ','_'))','@((libro.Autor).Replace(' ','_'))','@((libro.Tema).Replace(' ','_'))','@((libro.Paginas).Replace(' ','_'))','@((libro.Formatouno).Replace(' ','_'))','@((libro.Formatodos).Replace(' ','_'))','@((libro.Formatotres).Replace(' ','_'))','@((libro.Estado).Replace(' ','_'))','@((libro.Precio).Replace(' ','_'))')>
+                   @libro</li><br/>
+            
+            }
+        </ul>
+        <span>Total de libros: @Model.Count</span>
+    </div>
+    <div id="form-main">
+        <div id="form-divi">
+            <form class="form" id="form1" action="">
+                <input hidden name="codigo"  id="codigo"/>
+                <p class="name" title="Título">
+                    <input name="titulo"  type="text" maxlength="30" required = ""  class="feedback-input" placeholder="Título" id="titulo"/>
+                </p>
+                <p class="paswd" title="Autor">
+                    <input name="autor"  type="text" maxlength="30" minlength="5" required = "" class="feedback-input"  placeholder="Autor" id="autor" disabled/>
+                </p>
+                <p class="paswd" title="Tema">
+                    <input name="tema"  type="text" maxlength="30" minlength="5" required = "" class="feedback-input"  placeholder="Tema" id="tema" disabled/>
+                </p>
+                <p class="cif">
+                    <input name="paginas"  type="text" maxlength="5" minlength="1" pattern="[0-9]{9}" required = "" class="feedback-input"  placeholder="Páginas" id="paginas" disabled/>
+                </p>
+                <p class="cif">
+                    <input name="precio" type="text"  required = "" class="feedback-input"  placeholder="Precio" id="precio"/>
+                </p>
+                <fieldset>
+                    <legend>Formato:</legend>
+                    <input type="checkbox"  name="formato" value="cantone" id="formatoUno"/>Cantoné <br>
+                    <input type="checkbox"  name="formato" value="rustica" id="formatoDos"/>Rústica<br>
+                    <input type="checkbox"  name="formato" value="tapa-dura" id="formatoTres"/>Tapa Dura<br>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Estado: </legend>
+                    <input type="radio"  name="estado" value="novedad"  id="novedad" />Novedad<br />
+                    <input type="radio"  name="estado" value="reedicion" id="reedicion" />Reedición<br />
+                </fieldset>
+            </form>
+        </div>
+    </div>
+     <script src="~/Content/js/consultaLibros.js"></script>
