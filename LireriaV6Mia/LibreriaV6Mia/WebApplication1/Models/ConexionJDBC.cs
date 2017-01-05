@@ -27,11 +27,12 @@ namespace LibreriaV3._1.Persistencia
                 try
                 {
                     connection = new MySqlConnection();
-                    connection.ConnectionString = 
+                    connection.ConnectionString =
                         "Server=" + ConfigurationManager.AppSettings["servidor"].ToString()
                         + ";Database=" + ConfigurationManager.AppSettings["baseDatos"].ToString()
-                        + ";Uid=" + ConfigurationManager.AppSettings["usuario"].ToString() 
-                        + ";Pwd=" + ConfigurationManager.AppSettings["password"].ToString() + ";";
+                        + ";Uid=" + ConfigurationManager.AppSettings["usuario"].ToString()
+                        + ";Pwd=" + ConfigurationManager.AppSettings["password"].ToString() + "; Connection LifeTime = 3600;" +
+                        "Max Pool Size=100;Min Pool Size=1;Pooling=true;";
                     connection.Open();
                 }
 
@@ -46,8 +47,8 @@ namespace LibreriaV3._1.Persistencia
 
         public static void CerrarConexion()
         {
-            if(connection!=null) connection.Close();
-            
+            if (connection != null) connection.Close();
+
         }
     }
 }

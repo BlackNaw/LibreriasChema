@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LibreriaV3._1.Comun;
+using LibreriaV3._1.Persistencia;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +18,11 @@ namespace WebApplication1
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+        protected void Application_End()
+        {
+            Util.EscribirDictionarySentenciasFichero();
+            ConexionJDBC.CerrarConexion();
         }
     }
 }
