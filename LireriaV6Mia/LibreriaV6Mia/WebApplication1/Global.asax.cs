@@ -19,10 +19,12 @@ namespace WebApplication1
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
         protected void Application_End()
         {
             Util.EscribirDictionarySentenciasFichero();
             ConexionJDBC.CerrarConexion();
+            
         }
     }
 }

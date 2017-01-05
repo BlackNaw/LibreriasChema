@@ -10,7 +10,7 @@ using LibreriaV3._1.Comun;
 
 namespace LibreriaV3._1.Persistencia
 {
-    public class AccesoBD
+    public class AccesoBD 
     {
         private static MySqlConnection connection = null;
         private MySqlTransaction transaccion;
@@ -41,18 +41,19 @@ namespace LibreriaV3._1.Persistencia
                 int index = 1;
                 foreach (string valor in map.Values)
                 {
-                    comando.Parameters.AddWithValue("@"+index++, valor);
+                    comando.Parameters.AddWithValue("@" + index++, valor);
                 }
                 if (sql.Contains("UPDATE"))
                 {
                     comando.Parameters.AddWithValue("@" + index, antiguo);
                 }
-                
+
             }
             catch (Exception) { throw; }
+            
             return comando.ExecuteNonQuery() > 0;
-        }
 
+            }
         public bool Borrar(string sql, object objeto)
         {
             try

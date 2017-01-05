@@ -1,5 +1,6 @@
 ﻿using LibreriaV3._1.Persistencia;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace LibreriaV3._1.Comun
 {
     public static class Util
     {
-        private static string ruta = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "sql.txt");
+        private static string ruta = AppDomain.CurrentDomain.BaseDirectory+"sql.txt";
         private static Dictionary<string, string> SENTENCIAS;
         static BinaryFormatter serializer = new BinaryFormatter();
 
@@ -36,6 +37,7 @@ namespace LibreriaV3._1.Comun
 
         public static void RellenarDictionarySentencias()
         {
+            
             if (ComprobarArchivo() && File.ReadAllLines(ruta).Count() > 0)
             {
                 using (var stream = File.OpenRead(ruta))
@@ -69,11 +71,10 @@ namespace LibreriaV3._1.Comun
             {
                 try
                 {
-                    File.Create(ruta).Close();
+                    File.Create(ruta).Close(); ;
                 }
-                catch(Exception ex)
+                catch
                 {
-                    Console.WriteLine(ex.ToString());
                     //Errores.controlError(new Errores(Errores.ERROR_FICHERO));
                     return false;
                 }

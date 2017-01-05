@@ -34,21 +34,23 @@ namespace LibreriaV3._1.Persistencia
                         + ";Pwd=" + ConfigurationManager.AppSettings["password"].ToString() + "; Connection LifeTime = 3600;" +
                         "Max Pool Size=100;Min Pool Size=1;Pooling=true;";
                     connection.Open();
-                }
 
+
+                }
                 catch (Exception ex)
                 {
                     string Success = ex.Message;
                     throw new Exception(ex.Message, ex);
                 }
             }
+            
             return connection;
         }
 
         public static void CerrarConexion()
         {
-            if (connection != null) connection.Close();
-
+            if(connection!=null) connection.Close();
+            
         }
     }
 }

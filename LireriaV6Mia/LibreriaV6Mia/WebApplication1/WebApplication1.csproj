@@ -365,6 +365,9 @@
     <Content Include="Views\Inicio\Inicio.cshtml" />
     <Content Include="Views\Libro\Insertar.cshtml" />
     <Content Include="Views\Libro\Consultar.cshtml" />
+    <Content Include="Views\Libro\Contacto.cshtml" />
+    <Content Include="Views\Libro\Baja.cshtml" />
+    <Content Include="Views\Libro\Modificar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

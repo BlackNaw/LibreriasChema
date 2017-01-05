@@ -11,10 +11,12 @@
         <ul id="notebook_ul">
                @foreach (var libro in Model)
             {
-            <li  class="campo" id="campo" onclick=obtnerLibro('@((libro.CodLibro).Replace(' ','_'))','@((libro.Titulo).Replace(' ','_'))','@((libro.Autor).Replace(' ','_'))','@((libro.Tema).Replace(' ','_'))','@((libro.Paginas).Replace(' ','_'))','@((libro.Formatouno).Replace(' ','_'))','@((libro.Formatodos).Replace(' ','_'))','@((libro.Formatotres).Replace(' ','_'))','@((libro.Estado).Replace(' ','_'))','@((libro.Precio).Replace(' ','_'))')>
-                   @libro</li><br/>
-            
-            }
+                <li class="campo" id="campo" onclick=obtnerLibro('@((libro.CodLibro).Replace(' ','_'))','@((libro.Titulo).Replace(' ','_'))','@((libro.Autor).Replace(' ','_'))','@((libro.Tema).Replace(' ','_'))','@((libro.Paginas).Replace(' ','_'))','@((libro.Formatouno).Replace(' ','_'))','@((libro.Formatodos).Replace(' ','_'))','@((libro.Formatotres).Replace(' ','_'))','@((libro.Estado).Replace(' ','_'))','@((libro.Precio).Replace(' ','_'))')>
+                    @libro
+                </li>
+                <br />
+
+               }
         </ul>
         <span>Total de libros: @Model.Count</span>
     </div>
