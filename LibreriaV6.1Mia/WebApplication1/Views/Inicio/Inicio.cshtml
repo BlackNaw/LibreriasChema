@@ -1,28 +1,109 @@
-﻿@{
+﻿@model List<LibreriaV3._1.Modelo.TLibro>
+@{
     ViewBag.Title = "Inicio";
 }
- <link rel="stylesheet" href="~/Content/css/styleIndex.css">
-<h1>La Esquina del Zorro</h1>
-<div class="container">
-    <div id="carousel">
-        <figure>
-            <img src="~/Content/imagenes/fotos/libreria1.jpg" alt=""></figure>
-        <figure>
-            <img src="~/Content/imagenes/fotos/libreria2.jpg" alt=""></figure>
-        <figure>
-            <img src="~/Content/imagenes/fotos/libreria3.jpg" alt=""></figure>
-        <figure>
-            <img src="~/Content/imagenes/fotos/libreria4.jpg" alt=""></figure>
-        <figure>
-            <img src="~/Content/imagenes/fotos/libreria5.jpg" alt=""></figure>
-        <figure>
-            <img src="~/Content/imagenes/fotos/libreria6.jpg" alt=""></figure>
-        <figure>
-            <img src="~/Content/imagenes/fotos/libreria7.jpg" alt=""></figure>
-        <figure>
-            <img src="~/Content/imagenes/fotos/libreria8.jpg" alt=""></figure>
-        <figure>
-            <img src="~/Content/imagenes/fotos/libreria9.jpg" alt=""></figure>
-    </div>
-</div>
+<script>
+    document.cookie = "CODIGO=" + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;'
+</script>
+    <!-- /.header -->
+    <div class="container">
+        <div class="shopping-cart" style="display: none">
+            <i class="fa fa-shopping-cart cart-icon" id="numero">
+                Libros elegidos:
+            </i>
 
+            <span class="badge" id="carrito">0</span>
+            <form action="/ServletCompra" method="post">
+                <ul class="shopping-cart-items" id="elementos"></ul>
+
+
+
+                <div class="shopping-cart-items" id="total">Total:0€</div>
+                <button style="border: black 1px solid" type="submit" class="button">Compra</button>
+            </form>
+            <a style="border: black 1px solid" onclick="location.href='/'" class="button">Vaciar Cesta</a>
+
+        </div> <!--end shopping-cart -->
+    </div> <!--end container -->
+    <html ng-app="flyingCartApp">
+    <main class="main" role="main">
+        <div class="main-inner wrapper">
+            <ul class="product-list ul-reset">
+                @foreach (var libro in Model)
+                {
+
+                    <li class="product-item ib">
+                        <section class="product-item-inner">
+                            <div class="product-item-image">
+                                <img src="~/Content/imagenes/libroDefecto.png"
+                                     alt="item" />
+                            </div>
+                            <!-- /.product-item-image -->
+                            <h1 style="text-align: center" class="product-item-title">
+                                Titulo: @libro.Titulo
+                            </h1>
+                            <!-- /.product-item-title -->
+                            <div class="product-item-rrp-price-saving">
+                                <div style="text-align: center" class="product-item-rrp">
+                                    Autor: @libro.Autor
+                                </div>
+                                <!-- /.product-item-rrp -->
+                                <div style="text-align: center" class="product-item-price">
+                                    Tema: @libro.Tema
+                                </div>
+                                <!-- /.product-item-price -->
+                                <div style="text-align: center" class="product-item-saving">
+                                    Estado: @libro.Estado
+                                </div>
+                                <div style="text-align: center" class="product-item-saving">
+                                    Precio: @libro.Precio
+                                </div>
+                                <!-- /.product-item-saving -->
+                            </div>
+                            <!-- /.product-item-rrp-price-saving -->
+                            <div style="text-align: center" class="product-item-lower">
+                                <div style="text-align: center">
+                                    Formato:
+                                    @if (!libro.Formatouno.Equals("N/A"))
+                                    {
+                                         @libro.Formatouno;
+                                    }
+                                     
+                                    @if (!libro.Formatodos.Equals("N/A"))
+                                    {
+                                         @libro.Formatodos;
+                                    }
+                                    
+                                    @if (!libro.Formatotres.Equals("N/A"))
+                                    {
+                                        @libro.Formatotres;
+                                    }
+                                    <br />
+                                    Paginas:@libro.Precio €
+                                </div>
+
+                                <!-- /.product-item-short-description -->
+                                <button class="product-item-add-to-cart" onclick=anadirCarrito("@libro.Titulo.Replace(" ","_")","@libro.CodLibro","@libro.Precio")> Añadir al carrito</button>
+                                <!--<input type="submit" value="Add to Cart" class="product-item-add-to-cart">-->
+
+                            </div>
+                            <!-- /.product-item-lower -->
+                        </section>
+                        <!-- /.product-item-inner -->
+                    </li>
+                }
+            </ul>
+            <!-- /.product-list ul-reset -->
+        </div>
+        <!-- /.main-inner wrapper -->
+    </main>
+    <!-- /.main -->
+    </html>
+
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src='http://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js'></script>
+    <script src="~/Content/js/index.js"></script>
+    <script src="~/Content/js/addtocart.js"></script>
+    <script src="~/Content/js/carrito.js"></script>
+
+    </body>

@@ -1,4 +1,5 @@
-﻿@{
+﻿@{ Layout = "~/Views/Plantilla/Plantilla.cshtml";}
+@{
     ViewBag.Title = "Alta";
 }
 
@@ -30,14 +31,14 @@
                     </p>
                     <fieldset>
                         <legend style="">Formato:</legend>
-                            <input type="checkbox" name="Formatouno" value="cantone"/>Cartoné <br>
-                            <input type="checkbox" name="Formatodos" value="rustica"/>Rústica<br>
-                            <input type="checkbox" name="Formatotres" value="tapadura"/>Tapa Dura<br>
+                            <input type="checkbox" name="Formatouno" value="Cartoné"/>Cartoné <br>
+                            <input type="checkbox" name="Formatodos" value="Rústica"/>Rústica<br>
+                            <input type="checkbox" name="Formatotres" value="Tapa Dura"/>Tapa Dura<br>
                     </fieldset>
                      <fieldset>
                         <legend>Estado: </legend>
-                        <input type="radio"  name="Estado" value="novedad" checked/>Novedad<br />
-                        <input type="radio"  name="Estado" value="reedicion" />Reedición<br />
+                        <input type="radio"  name="Estado" value="Novedad" checked/>Novedad<br />
+                        <input type="radio"  name="Estado" value="Reedición" />Reedición<br />
                     </fieldset>
                     <br>
                     <div class="submit">

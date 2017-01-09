@@ -215,6 +215,7 @@
     <Compile Include="Controllers\TFactura.cs" />
     <Compile Include="Controllers\TLibro.cs" />
     <Compile Include="Controllers\TLineaFactura.cs" />
+    <Compile Include="Controllers\TUsuario.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -368,6 +369,8 @@
     <Content Include="Views\Libro\Contacto.cshtml" />
     <Content Include="Views\Libro\Baja.cshtml" />
     <Content Include="Views\Libro\Modificar.cshtml" />
+    <Content Include="Views\Libro\InicioLibro.cshtml" />
+    <Content Include="Views\Plantilla\PlantillaUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -375,6 +378,7 @@
     <Folder Include="Content\imagenes\fotos\" />
     <Folder Include="Content\imagenes\Imagenes\" />
     <Folder Include="Content\imagenes\social\" />
+    <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -79,7 +79,7 @@ namespace Libreria_V6.Controllers
                 libro.Formatodos = libro.Formatodos == null ? "N/A" : libro.Formatodos;
                 libro.Formatotres = libro.Formatotres == null ? "N/A" : libro.Formatotres;
                 if (control.BorradoVirtual(libro)) {
-                    return Content(Util.mostrarmensaje("Libro borrado correctamente", "Insertar"));
+                    return Content(Util.mostrarmensaje("Libro borrado correctamente", "Baja"));
                 }
             }
             catch (Exception e)
@@ -115,7 +115,7 @@ namespace Libreria_V6.Controllers
 
             try
             {
-                libro.Precio = libro.Precio.Replace(".", ",");
+                libro.Precio= libro.Precio.Replace(".",",");
                 libro.Borrado = "0";
                 libro.Formatouno = libro.Formatouno == null ? "N/A" : libro.Formatouno;
                 libro.Formatodos = libro.Formatodos == null ? "N/A" : libro.Formatodos;
