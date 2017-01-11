@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "Login";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Sign up and login form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="~/Content/css/styleLogin.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="backbox">
+            <div class="loginMsg">
+                <div class="textcontent">
+                    <p class="title">¿No tienes una cuenta?</p>
+                    <p>Regístrese.</p>
+                    <button id="switch1">Registrar</button>
+                </div>
+            </div>
+            <div class="signupMsg visibility">
+                <div class="textcontent">
+                    <p class="title">¿Tienes una cuenta?</p>
+                    <p>Inicia sesión</p>
+                    <button id="switch2">Iniciar Sesión</button>
+                </div>
+            </div>
+        </div>
+        <!-- backbox -->
+        <form method="post">
+            <div class="frontbox">
+
+                <div class="login">
+                    <h2>Iniciar sesión</h2>
+                    <div class="inputbox">
+                        <input type="text" name="Nick" required placeholder="NOMBRE">
+                        <input type="password" name="Pass" required placeholder="CONTRASEÑA">
+                    </div>
+                    <p>¿Has olvidado la contraseña?</p>
+                    <button name="boton" value="iniciar">Iniciar sesión</button>
+                </div>
+        </form>
+        <form method="post">
+            <div class="signup hide">
+                <h2>Registrar</h2>
+                <div class="inputbox">
+                    <input type="text" name="Nick" required placeholder="USUARIO">
+                    <input type="password" name="Pass" required placeholder="CONTRASEÑA">
+                    <select name="Rol" class="feedback-input" id="rol">
+                        <option value="admin">Administrador</option>
+                        <option value="user">Usuario</option>
+                    </select>
+                </div>
+                <button name="boton" value="registrar">Registrar</a></button>
+            </div>
+        </form>
+    </div>
+
+    <!-- frontbox -->
+    </div>
+
+
+    <script src="~/Content/js/login.js"></script>
+
+</body>
+</html>

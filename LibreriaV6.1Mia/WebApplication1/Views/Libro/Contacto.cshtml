@@ -1,11 +1,22 @@
-﻿@{ Layout = "~/Views/Plantilla/Plantilla.cshtml";}
+﻿@using Libreria_V6.Controllers;
+<link rel="stylesheet" href="~/Content/css/styleContacto.css">
+@if (Session["usuario"] != null && ((TUsuario)Session["usuario"]).Rol.Equals("admin"))
+{
+    Layout = "~/Views/Plantilla/Plantilla.cshtml";
+}else
+{
+    <style>
+        body {
+            background-color: #EEE;
+        }
+    </style>
+}
 @{
     ViewBag.Title = "Contacto";
 }
 
 <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Lato:400,700,300'>
 <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'>
-<link rel="stylesheet" href="~/Content/css/styleContacto.css">
 
     <div class="card">
         <div class="photo"></div>

@@ -371,6 +371,7 @@
     <Content Include="Views\Libro\Modificar.cshtml" />
     <Content Include="Views\Libro\InicioLibro.cshtml" />
     <Content Include="Views\Plantilla\PlantillaUser.cshtml" />
+    <Content Include="Views\Inicio\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
