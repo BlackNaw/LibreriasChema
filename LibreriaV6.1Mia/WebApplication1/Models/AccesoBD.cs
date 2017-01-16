@@ -202,11 +202,13 @@ namespace LibreriaV3._1.Persistencia
         public void RollBack()
         {
             transaccion.Rollback();
+            transaccion.Dispose();
         }
 
         public void Commit()
         {
             transaccion.Commit();
+            transaccion.Dispose();
         }
 
         public void CloseConnection()

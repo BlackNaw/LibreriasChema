@@ -1,9 +1,19 @@
 ﻿@model List<LibreriaV3._1.Modelo.TLibro>
 @{
     ViewBag.Title = "Inicio";
+    HttpCookie cookie = Response.Cookies.Get("CODIGO");
+    cookie.Path = "/Inicio";
+    if (cookie != null)
+    {
+        cookie.Expires = DateTime.Parse("Thu, 01 Jan 1970 00:00:00 GMT");
+        Response.Cookies.Add(cookie);
+    }
 }
 <script>
-    document.cookie = "CODIGO=" + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;'
+                function actionForm(formid, act) {
+                    document.getElementById(formid).action = act;
+                    document.getElementById(formid).submit();
+                }
 </script>
     <!-- /.header -->
     <div class="container">
@@ -13,15 +23,14 @@
             </i>
 
             <span class="badge" id="carrito">0</span>
-            <form action="/ServletCompra" method="post">
+            <form id="form1" method="post">
                 <ul class="shopping-cart-items" id="elementos"></ul>
-
-
-
                 <div class="shopping-cart-items" id="total">Total:0€</div>
-                <button style="border: black 1px solid" type="submit" class="button">Compra</button>
+                <button style="border: black 1px solid" type="submit" class="button" onclick="actionForm(this.form.id, 'Inicio')">Compra</button>
+               
             </form>
-            <a style="border: black 1px solid" onclick="location.href='/'" class="button">Vaciar Cesta</a>
+            <a style="border: black 1px solid" onclick="location.href='Inicio'" class="button">Vaciar Cesta</a>
+            @*<a style="border: black 1px solid" onclick="location.href='/'" class="button">Vaciar Cesta</a>*@
 
         </div> <!--end shopping-cart -->
     </div> <!--end container -->
@@ -56,7 +65,7 @@
                                     Estado: @libro.Estado
                                 </div>
                                 <div style="text-align: center" class="product-item-saving">
-                                    Precio: @libro.Precio
+                                    Precio: @libro.Precio €
                                 </div>
                                 <!-- /.product-item-saving -->
                             </div>
@@ -79,11 +88,11 @@
                                         @libro.Formatotres;
                                     }
                                     <br />
-                                    Paginas:@libro.Precio €
+                                    Paginas:@libro.Paginas 
                                 </div>
 
                                 <!-- /.product-item-short-description -->
-                                <button class="product-item-add-to-cart" onclick=anadirCarrito("@libro.Titulo.Replace(" ","_")","@libro.CodLibro","@libro.Precio")> Añadir al carrito</button>
+                                <button class="product-item-add-to-cart" onclick=anadirCarrito("@libro.Titulo.Replace(" ","_")","@libro.CodLibro","@libro.Precio.Replace(",",".")")> Añadir al carrito</button>
                                 <!--<input type="submit" value="Add to Cart" class="product-item-add-to-cart">-->
 
                             </div>

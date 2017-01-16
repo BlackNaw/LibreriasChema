@@ -1,4 +1,5 @@
-﻿using LibreriaV3._1.Comun;
+﻿using Libreria_V6.Filtro;
+using LibreriaV3._1.Comun;
 using LibreriaV3._1.Modelo;
 using LibreriaV3._1.Negocio;
 using LibreriaV3._1.Persistencia;
@@ -13,10 +14,12 @@ namespace Libreria_V6.Controllers
     public class LibroController : Controller
     {   private ControlAccesoDAO<TLibro> control = new ControlAccesoDAO<TLibro>();
         // GET: Libro
+        [FiltroAdmin]
         public ActionResult Insertar()
         {
             return View(control.ObtenerTemas());
         }
+        [FiltroAdmin]
         [HttpPost]
         public ActionResult Insertar (TLibro libro)
         {
@@ -40,7 +43,7 @@ namespace Libreria_V6.Controllers
 
             return View(control.ObtenerTemas());
         }
-
+        [FiltroAdmin]
         public ActionResult Consultar()
         {
             List<TLibro> list = new List<TLibro>();
@@ -52,12 +55,11 @@ namespace Libreria_V6.Controllers
             
             return View(list);
         }
-
         public ActionResult Contacto()
         {
             return View();
         }
-
+        [FiltroAdmin]
         public ActionResult Baja()
         {
             List<TLibro> list = new List<TLibro>();
@@ -68,6 +70,7 @@ namespace Libreria_V6.Controllers
             }
             return View(list);
         }
+        [FiltroAdmin]
         [HttpPost]
         public ActionResult Baja(TLibro libro)
         {
@@ -95,7 +98,7 @@ namespace Libreria_V6.Controllers
             }
             return View(list);
         }
-
+        [FiltroAdmin]
         public ActionResult Modificar()
         {
             List<TLibro> list = new List<TLibro>();
@@ -109,6 +112,7 @@ namespace Libreria_V6.Controllers
             cosas[1] = control.ObtenerTemas();
             return View(cosas);
         }
+        [FiltroAdmin]
         [HttpPost]
         public ActionResult Modificar(TLibro libro)
         {

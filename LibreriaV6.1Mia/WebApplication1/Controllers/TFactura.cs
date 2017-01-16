@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LibreriaV3._1.Negocio
 {
-    class TFactura
+   public class TFactura
     {
       
 
@@ -30,6 +30,15 @@ namespace LibreriaV3._1.Negocio
             Cliente = cliente;
             FechaFactura = fechaFactura;
             Borrado = "0";
+        }
+
+
+        public TFactura(string cliente)
+        {
+            this.CodFactura = Util.GenerarCodigo(new TFactura().GetType());
+            this.Cliente = cliente;
+            this.FechaFactura = Convert.ToString(DateTime.Now);
+            this.Borrado = "0";
         }
         public TFactura() { }
 

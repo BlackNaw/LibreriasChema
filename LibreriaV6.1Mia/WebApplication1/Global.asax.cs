@@ -14,6 +14,15 @@ namespace WebApplication1
     {
         protected void Application_Start()
         {
+            try
+            {
+                Util.RellenarDictionarySentencias();
+
+            }
+            catch (Exception e)
+            {
+                Util.mostrarmensaje(Errores.ControlErrores(e), "");
+            }
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

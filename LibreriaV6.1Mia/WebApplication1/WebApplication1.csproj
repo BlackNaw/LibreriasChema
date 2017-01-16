@@ -216,6 +216,8 @@
     <Compile Include="Controllers\TLibro.cs" />
     <Compile Include="Controllers\TLineaFactura.cs" />
     <Compile Include="Controllers\TUsuario.cs" />
+    <Compile Include="Filtro\FiltroAdmin.cs" />
+    <Compile Include="Filtro\FiltroUser.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -372,6 +374,8 @@
     <Content Include="Views\Libro\InicioLibro.cshtml" />
     <Content Include="Views\Plantilla\PlantillaUser.cshtml" />
     <Content Include="Views\Inicio\Login.cshtml" />
+    <Content Include="Views\Inicio\Perfil.cshtml" />
+    <Content Include="Views\Inicio\Detalle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

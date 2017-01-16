@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibreriaV3._1.Negocio
 {
-    class TLineaFactura
+    public class TLineaFactura
     {
 
         public string CodFactura { get; set; }
