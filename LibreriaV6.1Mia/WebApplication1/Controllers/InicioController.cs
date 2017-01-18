@@ -108,10 +108,10 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult Inicio(string a)
         {
-           
+
             HttpCookie cookie = Request.Cookies.Get("CODIGO");
             cookie.Path = "/Inicio";
-            if (cookie!=null)
+            if (cookie != null)
             {
                 TUsuario usuario = (TUsuario)Session["usuario"];
 
@@ -122,7 +122,7 @@ namespace WebApplication1.Controllers
                 try
                 {
                     crearFactura(buscarLibros(codigos), usuario);
-                    
+
 
                 }
                 catch (Exception e)
@@ -133,9 +133,9 @@ namespace WebApplication1.Controllers
 
                 //return View("Perfil", datosPerfil());
             }
-            
+
             return View(rellenarLibros());
-           
+
         }
         private object[] datosPerfil()
         {
@@ -208,14 +208,14 @@ namespace WebApplication1.Controllers
                 if (!cod.Equals(""))
                 {
                     listLibro.Add((TLibro)control.Buscar(new TLibro().GetType(), "CodLibro", cod)[0]);
-                }                
+                }
             }
             return listLibro;
         }
 
         private void crearFactura(List<TLibro> listLibro, TUsuario usuario)
         {
-
+            List<TLineaFactura> listAux = new List<TLineaFactura>();
             TFactura factura = new TFactura(usuario.Nick);
             control.Insertar(factura);
             foreach (TLibro libro in listLibro)
@@ -229,10 +229,15 @@ namespace WebApplication1.Controllers
                     }
                 }
                 TLineaFactura lineaFactura = new TLineaFactura(factura.CodFactura, libro.Titulo, Convert.ToString(contador), Convert.ToString(double.Parse(libro.Precio) * contador));
+
                 try
                 {
-                    //Si inserta un libro repetido dará fallo, así que lo meto en un try catch
-                    control.Insertar(lineaFactura);
+                    if (!listAux.Contains(lineaFactura))
+                    {
+                        listAux.Add(lineaFactura);
+                        //Si inserta un libro repetido dará fallo, así que lo meto en un try catch
+                        control.Insertar(lineaFactura);
+                    }
                 }
                 catch (Exception e) { }
             }
