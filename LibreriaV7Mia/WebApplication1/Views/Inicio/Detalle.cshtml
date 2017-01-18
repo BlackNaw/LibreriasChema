@@ -1,0 +1,73 @@
+﻿@using LibreriaV3._1.Negocio;
+@{
+    ViewBag.Title = "Detalle";
+}
+
+<link rel="stylesheet" href="~/Content/css/styleDetalle.css" media="all" />
+<div id="dos">
+
+    <header class="clearfix">
+        <div id="logo">
+            <img src="~/Content/imagenes/favicon.ico">
+        </div>
+        <div id="company">
+            <h2 class="name">La Esquina del Zorro</h2>
+            <div>C/ Arroyo del Olivar, 34 Puente de Vallecas</div>
+            <div>(+34) 91 833 14 57</div>
+            <div><a href="mailto:contacto@librerialaesquinadelzorro.com">contacto@librerialaesquinadelzorro.com</a></div>
+        </div>
+
+    </header>
+        <main>
+            <div id="details" class="clearfix">
+                <div id="client">
+                    <div class="to">Cliente:</div>
+                    <h2 class="name">@Model[0]</h2>
+                </div>
+                <div id="invoice">
+                    <h1>Factura: @(((TFactura)Model[2]).CodFactura)</h1>
+                    <div class="date">Fecha de pedido: @(((TFactura)Model[2]).FechaFactura)</div>
+                </div>
+            </div>
+            <table border="0" cellspacing="0" cellpadding="0">
+                <thead>
+
+                    <tr>
+                        <th class="no">Num:</th>
+                        <th class="desc">LIBRO</th>
+                        <th class="unit">PRECIO UNITARIO</th>
+                        <th class="qty">CANTIDAD</th>
+                        <th class="total">TOTAL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{  int contador = 0;
+                        double suma = 0;
+                        foreach (TLineaFactura item in Model[1])
+                        {
+                            <tr>
+                                <td class="no">@(++contador) </td>
+                                <td class="desc"><h3>@item.Libro</h3></td>
+                                <td class="unit">@(double.Parse((item.Total)) / double.Parse((item.Cantidad)))&#8364</td>
+                                <td class="qty">@item.Cantidad</td>
+                                <td class="total">@item.Total</td>
+                            </tr>
+                           <a hidden>@(suma += double.Parse(item.Total));</a>
+                        }
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2"></td>
+                        <td colspan="2">TOTAL</td>
+                        <td>@(suma)&#8364</td>
+                    </tr>
+                </tfoot>
+            </table>
+            <div id="thanks">Gracias!</div>
+            <div id="notices">
+                <div>Aviso:</div>
+                <div class="notice">El env&iacuteo se realizar&aacute en los pr&oacuteximos 30 d&iacuteas</div>
+            </div>
+        </main>
+    </div>

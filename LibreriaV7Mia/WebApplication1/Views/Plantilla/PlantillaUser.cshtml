@@ -1,0 +1,54 @@
+﻿@using Libreria_V6.Controllers;
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>@ViewBag.Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+    <link rel="shortcut icon" href="~/Content/imagenes/favicon.ico">
+    <link rel="stylesheet" href="~/Content/css/style.css">
+    <link rel="stylesheet" href="~/Content/css/styleMenu.css">
+    <link rel="stylesheet" href="~/Content/css/styleCarrito.css">
+    <link rel="stylesheet" href="~/Content/css/styleCarrito2.css">
+</head>
+
+
+
+<header class="header">
+    <div class="header-inner wrapper">
+        <a href="/">
+            <img src="~/Content//imagenes/scripture-website-banner.jpg" id="cabecera">
+        </a>
+        <nav class="clearfix">
+            <ul class="clearfix">
+                <li><a href="/Inicio">Inicio</a></li>
+            
+                @if (Session["usuario"] != null)
+                {
+                   <li> @Html.ActionLink("Mi Perfil", "Perfil", "Inicio")</li>
+                    <li>@Html.ActionLink("Desconectar", "Desconectar", "Inicio")</li>
+                }
+                @if (Session["usuario"] == null)
+                {
+                    <li>@Html.ActionLink("Iniciar Sesión", "Login", "Inicio")</li>
+                }
+                @if (Session["usuario"] != null && ((TUsuario)Session["usuario"]).Rol.Equals("admin"))
+                {
+                    <li>@Html.ActionLink("Administrador", "Administrar", "Inicio")</li>
+                }
+                <ul class="navbar-right">
+                    <li>
+                        <a href="#" id="cart"><i class="fa fa-shopping-cart"></i> Cesta <span class="badge" id="cesta">0</span></a>
+                    </li>
+                    <li>@Html.ActionLink("Contacto", "Contacto", "Libro")</li>
+                </ul> <!--end navbar-right -->
+                <!--<li><span><i class="shopping-cart"></i></span></li>-->
+            </ul>
+            <a href="#" id="pull">Menu</a>
+        </nav>
+    </div>
+    <script src="~/Content/js/consultaLibros.js"></script>
+    <!-- /.header-inner wrapper -->
+</header>
+
+@RenderBody()

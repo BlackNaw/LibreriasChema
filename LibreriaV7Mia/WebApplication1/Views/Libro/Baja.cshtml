@@ -1,0 +1,58 @@
+﻿@{ Layout = "~/Views/Plantilla/Plantilla.cshtml";}
+@model List<LibreriaV3._1.Modelo.TLibro>
+@{
+    ViewBag.Title = "Baja";
+}
+
+<link rel="stylesheet" href="~/Content/css/styleBaja.css">
+<div id="notebooks" ng-app="notebooks" ng-controller="NotebookListCtrl">
+    <ul id="notebook_ul">
+        @foreach (var libro in Model)
+            {
+            <li class="campo" id="campo" onclick=obtnerLibro('@((libro.CodLibro).Replace(' ','_'))','@((libro.Titulo).Replace(' ','_'))','@((libro.Autor).Replace(' ','_'))','@((libro.Tema).Replace(' ','_'))','@((libro.Paginas).Replace(' ','_'))','@((libro.Formatouno).Replace(' ','_'))','@((libro.Formatodos).Replace(' ','_'))','@((libro.Formatotres).Replace(' ','_'))','@((libro.Estado).Replace(' ','_'))','@((libro.Precio).Replace(' ','_'))')>
+                @libro
+            </li>
+            <br />
+
+        }
+    </ul>
+    <span>Total de libros: @Model.Count</span>
+</div>
+<div id="form-main">
+    <div id="form-divi">
+        <form class="form" method="post">
+            <input hidden name="CodLibro" id="codigo" />
+            <p class="name" title="Título">
+                <input name="titulo" type="text" maxlength="30" required="" class="feedback-input" placeholder="Título" id="titulo" />
+            </p>
+            <p class="paswd" title="Autor">
+                <input name="Autor" type="text" maxlength="30" minlength="5" required="" class="feedback-input" placeholder="Autor" id="autor" />
+            </p>
+            <p class="paswd" title="Tema">
+                <input name="Tema" type="text" maxlength="30" minlength="5" required="" class="feedback-input" placeholder="Tema" id="tema"/>
+            </p>
+            <p class="cif">
+                <input name="Paginas" type="text" required="" class="feedback-input" placeholder="Páginas" id="paginas" />
+            </p>
+            <p class="cif">
+                <input name="Precio" type="text" required="" class="feedback-input" placeholder="Precio" id="precio" />
+            </p>
+            <fieldset>
+                <legend style="">Formato:</legend>
+                <input type="checkbox" name="Formatouno" value="cantone" id="formatoUno"/>Cartoné <br>
+                <input type="checkbox" name="Formatodos" value="rustica"id="formatoDos" />Rústica<br>
+                <input type="checkbox" name="Formatotres" value="tapadura"id="formatoTres" />Tapa Dura<br>
+            </fieldset>
+            <fieldset>
+                <legend>Estado: </legend>
+                <input type="radio" name="Estado" value="novedad" id="novedad" />Novedad<br />
+                <input type="radio" name="Estado" value="reedicion"id="reedicion"  />Reedición<br />
+            </fieldset>
+            <div class="submit">
+                <input name="boton" type="submit" value="Baja" class="boton" id="button-blue" />
+                <div class="ease"></div>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="~/Content/js/consultaLibros.js"></script>

@@ -1,0 +1,55 @@
+﻿@using LibreriaV3._1.Negocio;
+@using System.Collections;
+@{
+    ViewBag.Title = Model[2];
+   
+}
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="~/Content/css/stylePerfil.css">
+
+
+<body>
+
+    <table class="responstable">
+
+        <tr>
+            <th>Código de factura</th>
+            <th style="text-align: center">Fecha</th>
+            <th style="text-align: center">Importe</th>
+            <th style="text-align: center">Detalle</th>
+            <!--<th>Relationship</th>-->
+            <script>
+                function actionForm(formid, act) {
+                    document.getElementById(formid).action = act;
+                    document.getElementById(formid).submit();
+                }
+            </script>
+        </tr>
+        @{
+            int aux = 0;
+            foreach (TFactura item in Model[0])
+            {
+                aux++;
+                <form id="@aux" method="post">
+                    <tr>
+                        <td style="text-align: center"><input type="hidden" name="CodFactura" value="@item.CodFactura">@item.CodFactura</td>
+                        <td style="text-align: center"><input type="hidden" name="Fecha" value="@item.FechaFactura">@item.FechaFactura</td>
+                        <td style="text-align: center">@(((Dictionary<string, decimal>)Model[1])[item.CodFactura])</td>
+                        <td style="text-align: center">
+                            <button name="boton" value="Ver" onclick="actionForm(this.form.id, 'Detalle')">Ver</button>
+                            <button onclick="actionForm(this.form.id, 'Perfil')">Borrar</button>
+                        </td>
+                        <input type="hidden" name="usuario" value="@Model[2]">
+                    </tr>
+                </form>
+            }
+        }
+
+    </table>
+    </form>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js'></script>
+
+
+</body>
+</html>
