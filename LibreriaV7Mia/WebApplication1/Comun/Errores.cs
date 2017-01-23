@@ -51,7 +51,7 @@ namespace LibreriaV3._1.Comun
             {
                 return "ERROR: No existe la clave principal";
             }
-            return "ERROR desconocido";
+            return e.Message;
 
         }
 

@@ -83,10 +83,9 @@ namespace LibreriaV3._1.Comun
         public static string GenerarCodigo(Type clase)
         {
             string codigo;
-
-            using (libreriavsEntities context = new libreriavsEntities())
+            using (libreriavsEntities contex = new libreriavsEntities())
             {
-                codigo=context.tlibro.Max(o=>o.CodLibro);
+                codigo = contex.tlibro.Max(o => o.CodLibro);
             }
             if (codigo.Equals(""))
             {

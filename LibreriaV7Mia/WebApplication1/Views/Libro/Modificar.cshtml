@@ -1,6 +1,4 @@
-﻿
-
-@{ Layout = "~/Views/Plantilla/Plantilla.cshtml";}
+﻿@{ Layout = "~/Views/Plantilla/Plantilla.cshtml";}
 @{
     ViewBag.Title = "Modificar";
 }
@@ -12,7 +10,7 @@
         @foreach (var libro in Model[0])
             {
             <li class="campo" id="campo" onclick=obtnerLibro('@((libro.CodLibro).Replace(' ','_'))','@((libro.Titulo).Replace(' ','_'))','@((libro.Autor).Replace(' ','_'))','@((libro.tema).Replace(' ','_'))','@((libro.Paginas).Replace(' ','_'))','@((libro.Formatouno).Replace(' ','_'))','@((libro.Formatodos).Replace(' ','_'))','@((libro.Formatotres).Replace(' ','_'))','@((libro.Estado).Replace(' ','_'))','@((libro.Precio).Replace(' ','_'))')>
-                @libro
+                @libro.Titulo
             </li>
             <br />
 
@@ -32,10 +30,11 @@
             </p>
             <p class="paswd" title="tema">
                 <select name="tema" class="feedback-input" id="tema">
-                    @foreach (string tema in Model[1])
+                    @foreach (var tema in Model[1])
                     {
-                        <option value="@tema">@tema</option>
+                        <option value="@tema.tema1">@tema.tema1</option>
                     }
+                 </select>
             </p>
             <p class="cif">
                 <input name="Paginas" type="text" required="" class="feedback-input" placeholder="Páginas" id="paginas" />

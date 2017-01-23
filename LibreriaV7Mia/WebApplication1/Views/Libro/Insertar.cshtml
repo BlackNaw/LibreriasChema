@@ -17,9 +17,9 @@
                     </p>
                     <p class="nombre" title="tema">
                         <select name="tema" class="feedback-input" id="tema">
-                             @foreach (string tema1 in Model)
+                             @foreach (var tema in Model)
                             {
-                                <option value="@tema1">@tema1</option>
+                                <option value="@tema.tema1">@tema.tema1</option>
                             }
                         </select>
                     </p>

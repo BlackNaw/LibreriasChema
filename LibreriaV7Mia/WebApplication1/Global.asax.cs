@@ -1,5 +1,4 @@
 ﻿using LibreriaV3._1.Comun;
-using LibreriaV3._1.Persistencia;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,15 +13,15 @@ namespace WebApplication1
     {
         protected void Application_Start()
         {
-            try
-            {
-                Util.RellenarDictionarySentencias();
+            //try
+            //{
+            //    Util.RellenarDictionarySentencias();
 
-            }
-            catch (Exception e)
-            {
-                Util.mostrarmensaje(Errores.ControlErrores(e), "");
-            }
+            //}
+            //catch (Exception e)
+            //{
+            //    Util.mostrarmensaje(Errores.ControlErrores(e), "");
+            //}
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
@@ -31,9 +30,7 @@ namespace WebApplication1
 
         protected void Application_End()
         {
-            Util.EscribirDictionarySentenciasFichero();
-            ConexionJDBC.CerrarConexion();
-            
+            //Util.EscribirDictionarySentenciasFichero();            
         }
     }
 }

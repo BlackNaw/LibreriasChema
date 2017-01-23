@@ -1,5 +1,5 @@
 ﻿@{ Layout = "~/Views/Plantilla/Plantilla.cshtml";}
-@model List<LibreriaV3._1.Modelo.tlibro>
+@model List<Libreria_V6.tlibro>
 @{
     ViewBag.Title = "Baja";
 }
@@ -10,7 +10,7 @@
         @foreach (var libro in Model)
             {
             <li class="campo" id="campo" onclick=obtnerLibro('@((libro.CodLibro).Replace(' ','_'))','@((libro.Titulo).Replace(' ','_'))','@((libro.Autor).Replace(' ','_'))','@((libro.tema).Replace(' ','_'))','@((libro.Paginas).Replace(' ','_'))','@((libro.Formatouno).Replace(' ','_'))','@((libro.Formatodos).Replace(' ','_'))','@((libro.Formatotres).Replace(' ','_'))','@((libro.Estado).Replace(' ','_'))','@((libro.Precio).Replace(' ','_'))')>
-                @libro
+                @libro.Titulo
             </li>
             <br />
 
