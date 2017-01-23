@@ -96,6 +96,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -216,6 +218,21 @@
     <Compile Include="Controllers\TLibro.cs" />
     <Compile Include="Controllers\TLineaFactura.cs" />
     <Compile Include="Controllers\TUsuario.cs" />
+    <Compile Include="Entity.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Entity.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloLibreria.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModeloLibreria.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Filtro\FiltroAdmin.cs" />
     <Compile Include="Filtro\FiltroUser.cs" />
     <Compile Include="Global.asax.cs">
@@ -231,6 +248,21 @@
     <Compile Include="Models\UtilSQL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="tema.cs">
+      <DependentUpon>Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tfactura.cs">
+      <DependentUpon>Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tlibro.cs">
+      <DependentUpon>Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tlineafactura.cs">
+      <DependentUpon>Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tusuario.cs">
+      <DependentUpon>Entity.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\mensaje.css" />
@@ -294,6 +326,16 @@
     <Content Include="Content\old\bootstrap-theme.min.css" />
     <Content Include="Content\old\bootstrap.css" />
     <Content Include="Content\old\bootstrap.min.css" />
+    <Content Include="Entity.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModeloLibreria.edmx</DependentUpon>
+      <LastGenOutput>Entity.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Entity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModeloLibreria.edmx</DependentUpon>
+      <LastGenOutput>Entity.cs</LastGenOutput>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -310,6 +352,13 @@
     <Content Include="Content\old\bootstrap-theme.min.css.map" />
     <Content Include="Content\old\bootstrap-theme.css.map" />
     <Content Include="Content\css\SourceSansPro-Regular.ttf" />
+    <EntityDeploy Include="ModeloLibreria.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModeloLibreria.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="ModeloLibreria.edmx.diagram">
+      <DependentUpon>ModeloLibreria.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -390,6 +439,9 @@
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
