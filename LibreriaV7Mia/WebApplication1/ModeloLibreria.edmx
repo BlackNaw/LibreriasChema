@@ -27,7 +27,7 @@
           <Property Name="CodLibro" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="Autor" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Titulo" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Tema" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="tema" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Paginas" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Precio" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Formatouno" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -108,7 +108,7 @@
           <Property Name="CodLibro" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Autor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Tema" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="tema" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Paginas" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Precio" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Formatouno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
@@ -191,7 +191,7 @@
                 <ScalarProperty Name="CodLibro" ColumnName="CodLibro" />
                 <ScalarProperty Name="Autor" ColumnName="Autor" />
                 <ScalarProperty Name="Titulo" ColumnName="Titulo" />
-                <ScalarProperty Name="Tema" ColumnName="Tema" />
+                <ScalarProperty Name="tema" ColumnName="tema" />
                 <ScalarProperty Name="Paginas" ColumnName="Paginas" />
                 <ScalarProperty Name="Precio" ColumnName="Precio" />
                 <ScalarProperty Name="Formatouno" ColumnName="Formatouno" />

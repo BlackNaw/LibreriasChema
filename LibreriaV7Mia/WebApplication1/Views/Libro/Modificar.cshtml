@@ -11,7 +11,7 @@
     <ul id="notebook_ul">
         @foreach (var libro in Model[0])
             {
-            <li class="campo" id="campo" onclick=obtnerLibro('@((libro.CodLibro).Replace(' ','_'))','@((libro.Titulo).Replace(' ','_'))','@((libro.Autor).Replace(' ','_'))','@((libro.Tema).Replace(' ','_'))','@((libro.Paginas).Replace(' ','_'))','@((libro.Formatouno).Replace(' ','_'))','@((libro.Formatodos).Replace(' ','_'))','@((libro.Formatotres).Replace(' ','_'))','@((libro.Estado).Replace(' ','_'))','@((libro.Precio).Replace(' ','_'))')>
+            <li class="campo" id="campo" onclick=obtnerLibro('@((libro.CodLibro).Replace(' ','_'))','@((libro.Titulo).Replace(' ','_'))','@((libro.Autor).Replace(' ','_'))','@((libro.tema).Replace(' ','_'))','@((libro.Paginas).Replace(' ','_'))','@((libro.Formatouno).Replace(' ','_'))','@((libro.Formatodos).Replace(' ','_'))','@((libro.Formatotres).Replace(' ','_'))','@((libro.Estado).Replace(' ','_'))','@((libro.Precio).Replace(' ','_'))')>
                 @libro
             </li>
             <br />
@@ -30,8 +30,8 @@
             <p class="paswd" title="Autor">
                 <input name="Autor" type="text" maxlength="30" minlength="5" required="" class="feedback-input" placeholder="Autor" id="autor" />
             </p>
-            <p class="paswd" title="Tema">
-                <select name="Tema" class="feedback-input" id="tema">
+            <p class="paswd" title="tema">
+                <select name="tema" class="feedback-input" id="tema">
                     @foreach (string tema in Model[1])
                     {
                         <option value="@tema">@tema</option>

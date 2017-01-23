@@ -1,5 +1,5 @@
 ﻿@{ Layout = "~/Views/Plantilla/Plantilla.cshtml";}
-@model List<LibreriaV3._1.Modelo.TLibro>
+@model List<LibreriaV3._1.Modelo.tlibro>
 @{
     ViewBag.Title = "Baja";
 }
@@ -9,7 +9,7 @@
     <ul id="notebook_ul">
         @foreach (var libro in Model)
             {
-            <li class="campo" id="campo" onclick=obtnerLibro('@((libro.CodLibro).Replace(' ','_'))','@((libro.Titulo).Replace(' ','_'))','@((libro.Autor).Replace(' ','_'))','@((libro.Tema).Replace(' ','_'))','@((libro.Paginas).Replace(' ','_'))','@((libro.Formatouno).Replace(' ','_'))','@((libro.Formatodos).Replace(' ','_'))','@((libro.Formatotres).Replace(' ','_'))','@((libro.Estado).Replace(' ','_'))','@((libro.Precio).Replace(' ','_'))')>
+            <li class="campo" id="campo" onclick=obtnerLibro('@((libro.CodLibro).Replace(' ','_'))','@((libro.Titulo).Replace(' ','_'))','@((libro.Autor).Replace(' ','_'))','@((libro.tema).Replace(' ','_'))','@((libro.Paginas).Replace(' ','_'))','@((libro.Formatouno).Replace(' ','_'))','@((libro.Formatodos).Replace(' ','_'))','@((libro.Formatotres).Replace(' ','_'))','@((libro.Estado).Replace(' ','_'))','@((libro.Precio).Replace(' ','_'))')>
                 @libro
             </li>
             <br />
@@ -28,8 +28,8 @@
             <p class="paswd" title="Autor">
                 <input name="Autor" type="text" maxlength="30" minlength="5" required="" class="feedback-input" placeholder="Autor" id="autor" />
             </p>
-            <p class="paswd" title="Tema">
-                <input name="Tema" type="text" maxlength="30" minlength="5" required="" class="feedback-input" placeholder="Tema" id="tema"/>
+            <p class="paswd" title="tema">
+                <input name="tema" type="text" maxlength="30" minlength="5" required="" class="feedback-input" placeholder="tema" id="tema"/>
             </p>
             <p class="cif">
                 <input name="Paginas" type="text" required="" class="feedback-input" placeholder="Páginas" id="paginas" />

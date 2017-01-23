@@ -1,6 +1,6 @@
 ﻿@using Libreria_V6.Controllers;
 <link rel="stylesheet" href="~/Content/css/styleContacto.css">
-@if (Session["usuario"] != null && ((TUsuario)Session["usuario"]).Rol.Equals("admin"))
+@if (Session["usuario"] != null && ((tusuario)Session["usuario"]).Rol.Equals("admin"))
 {
     Layout = "~/Views/Plantilla/Plantilla.cshtml";
 }else

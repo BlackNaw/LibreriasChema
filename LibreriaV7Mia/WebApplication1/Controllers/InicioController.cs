@@ -1,12 +1,9 @@
 ﻿using Libreria_V6;
-using Libreria_V6.Controllers;
 using Libreria_V6.Filtro;
 using LibreriaV3._1.Comun;
-using LibreriaV3._1.Negocio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -45,7 +42,8 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult Login(tusuario usuario)
         {
-            using (libreriavsEntities context = new libreriavsEntities()) {
+            using (libreriavsEntities context = new libreriavsEntities())
+            {
                 tusuario temporal = context.tusuario.Find(usuario)/*.Equals(null)?null:context.tusuario.Find(usuario)*/;
                 if (usuario.Rol == null)
                 {
@@ -72,35 +70,61 @@ namespace WebApplication1.Controllers
                 try
                 {
                     usuario.CodUsuario = Util.GenerarCodigo(usuario.GetType());
-                    control.Insertar(usuario);
+                    context.tusuario.Add(usuario);
+                    context.SaveChanges();
+                    context.Database.BeginTransaction().Commit();
                 }
                 catch (Exception e)
                 {
+                    context.Database.BeginTransaction().Rollback();
                     return Content(Util.mostrarmensaje(Errores.ControlErrores(e), "Login"));
                 }
+                context.Database.BeginTransaction().Dispose();
                 return Content(Util.mostrarmensaje("Dado de alta correctamente", "Login"));
-            } }
-        [FiltroUser]
-        [HttpPost]
-        public ActionResult Detalle(TFactura factura)
-        {
-            string usuario = ((TUsuario)Session["usuario"]).Nick;
-            TFactura facturaAux = (TFactura)control.Buscar(factura.GetType(), factura.CodFactura);
-            List<TLineaFactura> list = new List<TLineaFactura>();
-            foreach (TLineaFactura item in control.Buscar(new TLineaFactura().GetType(), "CodFactura", factura.CodFactura))
-            {
-                list.Add(item);
             }
-
-            object[] obj = { usuario, list, facturaAux };
-            return View(obj);
         }
         [FiltroUser]
         [HttpPost]
-        public ActionResult Perfil(TFactura factura)
+        public ActionResult Detalle(tfactura factura)
         {
-            TFactura facturaAux = (TFactura)control.Buscar(factura.GetType(), factura.CodFactura);
-            control.BorradoVirtual(facturaAux);
+            tfactura facturaAux;
+            List<tlineafactura> list;
+            string usuario = ((tusuario)Session["usuario"]).Nick;
+            using (libreriavsEntities context = new libreriavsEntities())
+            {
+                try
+                {
+                    facturaAux = context.tfactura.Find(factura.CodFactura);
+                    list = context.tlineafactura.Where(o => o.CodFactura.Equals(factura.CodFactura)).ToList<tlineafactura>();
+                }
+                catch (Exception ex)
+                {
+                    return Content(Util.mostrarmensaje(Errores.ControlErrores(ex), "Inicio"));
+                }
+                object[] obj = { usuario, list, facturaAux };
+                return View(obj);
+            }
+        }
+        [FiltroUser]
+        [HttpPost]
+        public ActionResult Perfil(tfactura factura)
+        {
+            using (libreriavsEntities context = new libreriavsEntities())
+            {
+                try
+                {
+                    context.tfactura.Find(factura.CodFactura).Borrado = "1";
+                    context.SaveChanges();
+                    context.Database.BeginTransaction().Commit();
+                }
+                catch (Exception ex)
+                {
+                    context.Database.BeginTransaction().Rollback();
+                    return Content(Util.mostrarmensaje(Errores.ControlErrores(ex), "Perfil"));
+                }
+                context.Database.BeginTransaction().Dispose();
+            }
+
             return View(datosPerfil());
         }
         [FiltroUser]
@@ -112,7 +136,7 @@ namespace WebApplication1.Controllers
             cookie.Path = "/Inicio";
             if (cookie != null)
             {
-                TUsuario usuario = (TUsuario)Session["usuario"];
+                tusuario usuario = (tusuario)Session["usuario"];
 
                 String[] codigos = (cookie.Value).Split('_');
                 cookie.Expires = DateTime.Parse("Thu, 01 Jan 1970 00:00:00 GMT");
@@ -121,42 +145,39 @@ namespace WebApplication1.Controllers
                 try
                 {
                     crearFactura(buscarLibros(codigos), usuario);
-
-
                 }
                 catch (Exception e)
                 {
                     return Content(Util.mostrarmensaje(Errores.ControlErrores(e), "Inicio"));
                 }
-
-
-                //return View("Perfil", datosPerfil());
             }
-
             return View(rellenarLibros());
-
         }
         private object[] datosPerfil()
         {
-            TUsuario usuario = (TUsuario)Session["usuario"];
-            List<TFactura> facturas = new List<TFactura>();
+            tusuario usuario = (tusuario)Session["usuario"];
+            List<tfactura> facturas = new List<tfactura>();
             Dictionary<string, decimal> totales = new Dictionary<string, decimal>();
             decimal aux;
-            foreach (TFactura item in control.Buscar(new TFactura().GetType(), "Cliente", usuario.Nick))
+            using (libreriavsEntities context = new libreriavsEntities())
             {
-                if (item.Borrado.Equals("0"))
+                try
                 {
-                    aux = 0;
-                    facturas.Add(item);
-                    foreach (TLineaFactura linea in control.Buscar(new TLineaFactura().GetType(), "CodFactura", item.CodFactura))
+                    facturas = context.tfactura.Where(o => o.Cliente.Equals(usuario.Nick) && !o.Borrado.Equals("0")).ToList<tfactura>();
+                    foreach (tfactura item in facturas)
                     {
-                        aux += decimal.Parse(linea.Total);
+                        aux = 0;
+                        foreach (tlineafactura linea in context.tlineafactura.Where(o => o.CodFactura.Equals(item.CodFactura)).ToList<tlineafactura>())
+                        {
+                            aux += decimal.Parse(linea.Total);
+                        }
+                        totales.Add(item.CodFactura, aux);
                     }
-                    totales.Add(item.CodFactura, aux);
-
                 }
-
-
+                catch (Exception ex)
+                {
+                    Util.mostrarmensaje(Errores.ControlErrores(ex), "Inicio");
+                }
             }
             object[] obj = { facturas, totales, usuario.Nick };
             return obj;
@@ -184,59 +205,82 @@ namespace WebApplication1.Controllers
             List<tlibro> list = new List<tlibro>();
             try
             {
-                using(libreriavsEntities context=new libreriavsEntities())
+                using (libreriavsEntities context = new libreriavsEntities())
                 {
                     list = context.tlibro.ToList<tlibro>();
                 }
             }
             catch (Exception ex)
             {
-                throw ex;
+                Content(Util.mostrarmensaje(Errores.ControlErrores(ex), "Inicio"));
             }
             return list;
         }
 
-        private List<TLibro> buscarLibros(String[] codigos)
+        private List<tlibro> buscarLibros(string[] codigos)
         {
-            List<TLibro> listLibro = new List<TLibro>();
-
-            foreach (string cod in codigos)
+            List<tlibro> listlibro = new List<tlibro>();
+            try
             {
-                if (!cod.Equals(""))
+                using (libreriavsEntities context = new libreriavsEntities())
                 {
-                    listLibro.Add((TLibro)control.Buscar(new TLibro().GetType(), "CodLibro", cod)[0]);
-                }
-            }
-            return listLibro;
-        }
-
-        private void crearFactura(List<TLibro> listLibro, TUsuario usuario)
-        {
-            List<TLineaFactura> listAux = new List<TLineaFactura>();
-            TFactura factura = new TFactura(usuario.Nick);
-            control.Insertar(factura);
-            foreach (TLibro libro in listLibro)
-            {
-                int contador = 0;
-                for (int i = 0; i < listLibro.Count; i++)
-                {
-                    if (listLibro[i].CodLibro.Equals(libro.CodLibro))
+                    for (int i = 0; i < codigos.Length; i++)
                     {
-                        contador++;
+                        if (!codigos[i].Equals(""))
+                            listlibro.Add((tlibro)context.tlibro.Where(o => o.CodLibro.Equals(codigos[i])));
                     }
                 }
-                TLineaFactura lineaFactura = new TLineaFactura(factura.CodFactura, libro.Titulo, Convert.ToString(contador), Convert.ToString(double.Parse(libro.Precio) * contador));
+            }
+            catch (Exception ex)
+            {
+                Util.mostrarmensaje(Errores.ControlErrores(ex), "Inicio");
+            }
+            return listlibro;
+        }
+
+        private void crearFactura(List<tlibro> listlibro, tusuario usuario)
+        {
+            List<tlineafactura> listAux = new List<tlineafactura>();
+            using (libreriavsEntities context = new libreriavsEntities())
+            {
+                tfactura factura = new tfactura();
+                factura.Borrado = "0";
+                factura.Cliente = usuario.Nick;
+                factura.CodFactura =Util.GenerarCodigo(factura.GetType());
+                factura.FechaFactura = Convert.ToString(DateTime.Now);
 
                 try
                 {
-                    if (!listAux.Contains(lineaFactura))
+                    context.tfactura.Add(factura);
+                    foreach (tlibro libro in listlibro)
                     {
-                        listAux.Add(lineaFactura);
-                        //Si inserta un libro repetido dará fallo, así que lo meto en un try catch
-                        control.Insertar(lineaFactura);
+                        int contador = 0;
+                        for (int i = 0; i < listlibro.Count; i++)
+                        {
+                            if (listlibro[i].CodLibro.Equals(libro.CodLibro))
+                            {
+                                contador++;
+                            }
+                        }
+                        tlineafactura lineaFactura = new tlineafactura();
+                        lineaFactura.CodFactura = factura.CodFactura;
+                        lineaFactura.Libro = libro.Titulo;
+                        lineaFactura.Cantidad = Convert.ToString(contador);
+                        lineaFactura.Total=Convert.ToString(double.Parse(libro.Precio) * contador);
+
+                        if (!listAux.Contains(lineaFactura))
+                        {
+                            listAux.Add(lineaFactura);
+                            context.tlineafactura.Add(lineaFactura);
+                        }
                     }
+                    context.Database.BeginTransaction().Commit();
                 }
-                catch (Exception e) { }
+                catch (Exception ex)
+                {
+                    context.Database.BeginTransaction().Rollback();
+                }
+                context.Database.BeginTransaction().Dispose();
             }
         }
     }

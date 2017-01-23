@@ -1,6 +1,5 @@
-﻿using LibreriaV3._1.Persistencia;
+﻿using Libreria_V6;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -83,7 +82,12 @@ namespace LibreriaV3._1.Comun
         }
         public static string GenerarCodigo(Type clase)
         {
-            string codigo = new AccesoBD().ObtenerCodigo(clase);
+            string codigo;
+
+            using (libreriavsEntities context = new libreriavsEntities())
+            {
+                codigo=context.tlibro.Max(o=>o.CodLibro);
+            }
             if (codigo.Equals(""))
             {
                 return "cod001";

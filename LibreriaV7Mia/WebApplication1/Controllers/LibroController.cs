@@ -1,59 +1,65 @@
 ﻿using Libreria_V6.Filtro;
 using LibreriaV3._1.Comun;
-using LibreriaV3._1.Modelo;
-using LibreriaV3._1.Negocio;
-using LibreriaV3._1.Persistencia;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using System.Linq;
 
 namespace Libreria_V6.Controllers
 {
     public class LibroController : Controller
-    {   private ControlAccesoDAO<TLibro> control = new ControlAccesoDAO<TLibro>();
+    {
         // GET: Libro
         [FiltroAdmin]
         public ActionResult Insertar()
         {
-            return View(control.ObtenerTemas());
+            using (libreriavsEntities context = new libreriavsEntities())
+            {
+                return View(context.tema);
+            }
         }
         [FiltroAdmin]
         [HttpPost]
-        public ActionResult Insertar (TLibro libro)
+        public ActionResult Insertar(tlibro libro)
         {
-           
-            try
+            using (libreriavsEntities context = new libreriavsEntities())
             {
-                libro.Precio = libro.Precio.Replace(".", ",");
-                libro.CodLibro = Util.GenerarCodigo(libro.GetType());
-                libro.Borrado = "0";
-                libro.Formatouno = libro.Formatouno == null ? "N/A" : libro.Formatouno;
-                libro.Formatodos = libro.Formatodos  == null ? "N/A" : libro.Formatodos;
-                libro.Formatotres  = libro.Formatotres == null ? "N/A" : libro.Formatotres;
-                if (control.Insertar(libro)) {
-                    return Content(Util.mostrarmensaje("Libro insertado correctamente", "Insertar"));
-                }
-                    
-            }catch(Exception e)
-            {
-                return Content(Util.mostrarmensaje(Errores.ControlErrores(e), "Insertar"));
-            }
+                try
+                {
+                    libro.Precio = libro.Precio.Replace(".", ",");
+                    libro.CodLibro = Util.GenerarCodigo(libro.GetType());
+                    libro.Borrado = "0";
+                    libro.Formatouno = libro.Formatouno == null ? "N/A" : libro.Formatouno;
+                    libro.Formatodos = libro.Formatodos == null ? "N/A" : libro.Formatodos;
+                    libro.Formatotres = libro.Formatotres == null ? "N/A" : libro.Formatotres;
+                    context.tlibro.Add(libro);
 
-            return View(control.ObtenerTemas());
+                    if (context.SaveChanges() == 1)
+                    {
+                        return Content(Util.mostrarmensaje("Libro insertado correctamente", "Insertar"));
+                    }
+                    context.Database.BeginTransaction().Commit();
+                }
+                catch (Exception e)
+                {
+                    context.Database.BeginTransaction().Rollback();
+                    return Content(Util.mostrarmensaje(Errores.ControlErrores(e), "Insertar"));
+                }
+                finally
+                {
+                    context.Database.BeginTransaction().Dispose();
+                }
+
+                return View(context.tema);
+            }
         }
         [FiltroAdmin]
         public ActionResult Consultar()
         {
-            List<TLibro> list = new List<TLibro>();
-
-            foreach (var item in control.Obtener(new TLibro().GetType()))
+            using (libreriavsEntities context = new libreriavsEntities())
             {
-                list.Add((TLibro)item);
+                return View(context.tlibro.Where(o => o.Borrado.Equals("0")).ToList<tlibro>());
             }
-            
-            return View(list);
         }
         public ActionResult Contacto()
         {
@@ -62,17 +68,17 @@ namespace Libreria_V6.Controllers
         [FiltroAdmin]
         public ActionResult Baja()
         {
-            List<TLibro> list = new List<TLibro>();
+            List<tlibro> list = new List<tlibro>();
 
-            foreach (var item in control.Obtener(new TLibro().GetType()))
+            foreach (var item in control.Obtener(new tlibro().GetType()))
             {
-                list.Add((TLibro)item);
+                list.Add((tlibro)item);
             }
             return View(list);
         }
         [FiltroAdmin]
         [HttpPost]
-        public ActionResult Baja(TLibro libro)
+        public ActionResult Baja(tlibro libro)
         {
 
             try
@@ -81,7 +87,8 @@ namespace Libreria_V6.Controllers
                 libro.Formatouno = libro.Formatouno == null ? "N/A" : libro.Formatouno;
                 libro.Formatodos = libro.Formatodos == null ? "N/A" : libro.Formatodos;
                 libro.Formatotres = libro.Formatotres == null ? "N/A" : libro.Formatotres;
-                if (control.BorradoVirtual(libro)) {
+                if (control.BorradoVirtual(libro))
+                {
                     return Content(Util.mostrarmensaje("Libro borrado correctamente", "Baja"));
                 }
             }
@@ -90,36 +97,36 @@ namespace Libreria_V6.Controllers
                 return Content(Util.mostrarmensaje(Errores.ControlErrores(e), "Baja"));
             }
 
-            List<TLibro> list = new List<TLibro>();
+            List<tlibro> list = new List<tlibro>();
 
-            foreach (var item in control.Obtener(new TLibro().GetType()))
+            foreach (var item in control.Obtener(new tlibro().GetType()))
             {
-                list.Add((TLibro)item);
+                list.Add((tlibro)item);
             }
             return View(list);
         }
         [FiltroAdmin]
         public ActionResult Modificar()
         {
-            List<TLibro> list = new List<TLibro>();
+            List<tlibro> list = new List<tlibro>();
 
-            foreach (var item in control.Obtener(new TLibro().GetType()))
+            foreach (var item in control.Obtener(new tlibro().GetType()))
             {
-                list.Add((TLibro)item);
+                list.Add((tlibro)item);
             }
             object[] cosas = new object[2];
             cosas[0] = list;
-            cosas[1] = control.ObtenerTemas();
+            cosas[1] = control.Obtenertemas();
             return View(cosas);
         }
         [FiltroAdmin]
         [HttpPost]
-        public ActionResult Modificar(TLibro libro)
+        public ActionResult Modificar(tlibro libro)
         {
 
             try
             {
-                libro.Precio= libro.Precio.Replace(".",",");
+                libro.Precio = libro.Precio.Replace(".", ",");
                 libro.Borrado = "0";
                 libro.Formatouno = libro.Formatouno == null ? "N/A" : libro.Formatouno;
                 libro.Formatodos = libro.Formatodos == null ? "N/A" : libro.Formatodos;
@@ -131,16 +138,16 @@ namespace Libreria_V6.Controllers
                 return Content(Util.mostrarmensaje(Errores.ControlErrores(e), "Modificar"));
             }
 
-            List<TLibro> list = new List<TLibro>();
+            List<tlibro> list = new List<tlibro>();
 
-            foreach (var item in control.Obtener(new TLibro().GetType()))
+            foreach (var item in control.Obtener(new tlibro().GetType()))
             {
-                list.Add((TLibro)item);
+                list.Add((tlibro)item);
             }
             object[] cosas = new object[2];
             cosas[0] = list;
-            cosas[1] = control.ObtenerTemas();
+            cosas[1] = control.Obtenertemas();
             return View(cosas);
         }
-        }
     }
+}

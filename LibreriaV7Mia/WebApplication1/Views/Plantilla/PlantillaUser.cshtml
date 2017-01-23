@@ -32,7 +32,7 @@
                 {
                     <li>@Html.ActionLink("Iniciar Sesión", "Login", "Inicio")</li>
                 }
-                @if (Session["usuario"] != null && ((TUsuario)Session["usuario"]).Rol.Equals("admin"))
+                @if (Session["usuario"] != null && ((tusuario)Session["usuario"]).Rol.Equals("admin"))
                 {
                     <li>@Html.ActionLink("Administrador", "Administrar", "Inicio")</li>
                 }

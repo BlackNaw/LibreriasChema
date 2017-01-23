@@ -17,7 +17,7 @@ namespace Libreria_V6
         public string CodLibro { get; set; }
         public string Autor { get; set; }
         public string Titulo { get; set; }
-        public string Tema { get; set; }
+        public string tema { get; set; }
         public string Paginas { get; set; }
         public string Precio { get; set; }
         public string Formatouno { get; set; }

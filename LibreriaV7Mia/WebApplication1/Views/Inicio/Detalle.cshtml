@@ -25,8 +25,8 @@
                     <h2 class="name">@Model[0]</h2>
                 </div>
                 <div id="invoice">
-                    <h1>Factura: @(((TFactura)Model[2]).CodFactura)</h1>
-                    <div class="date">Fecha de pedido: @(((TFactura)Model[2]).FechaFactura)</div>
+                    <h1>Factura: @(((tfactura)Model[2]).CodFactura)</h1>
+                    <div class="date">Fecha de pedido: @(((tfactura)Model[2]).FechaFactura)</div>
                 </div>
             </div>
             <table border="0" cellspacing="0" cellpadding="0">
@@ -43,7 +43,7 @@
                 <tbody>
                     @{  int contador = 0;
                         double suma = 0;
-                        foreach (TLineaFactura item in Model[1])
+                        foreach (tlineafactura item in Model[1])
                         {
                             <tr>
                                 <td class="no">@(++contador) </td>

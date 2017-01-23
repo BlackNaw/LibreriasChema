@@ -12,7 +12,7 @@ namespace Libreria_V6.Filtro
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            TUsuario usuario = (TUsuario)filterContext.HttpContext.Session["usuario"];
+            tusuario usuario = (tusuario)filterContext.HttpContext.Session["usuario"];
 
             if (usuario == null)
             {
