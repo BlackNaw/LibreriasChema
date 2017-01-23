@@ -1,7 +1,7 @@
-﻿using Libreria_V6.Controllers;
+﻿using Libreria_V6;
+using Libreria_V6.Controllers;
 using Libreria_V6.Filtro;
 using LibreriaV3._1.Comun;
-using LibreriaV3._1.Modelo;
 using LibreriaV3._1.Negocio;
 using System;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ namespace WebApplication1.Controllers
 {
     public class InicioController : Controller
     {
-        private ControlAccesoDAO<object> control = new ControlAccesoDAO<object>();
+        //private ControlAccesoDAO<object> control = new ControlAccesoDAO<object>();
         public ActionResult Inicio()
         {
 
@@ -43,44 +43,43 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(TUsuario usuario)
+        public ActionResult Login(tusuario usuario)
         {
-
-            TUsuario temporal = control.Buscar(usuario.GetType(), "Nick", usuario.Nick).Count == 0 ? null : (TUsuario)control.Buscar(usuario.GetType(), "Nick", usuario.Nick).First();
-
-            if (usuario.Rol == null)
-            {
-                if (ComprobarUsuario(usuario, temporal))
+            using (libreriavsEntities context = new libreriavsEntities()) {
+                tusuario temporal = context.tusuario.Find(usuario)/*.Equals(null)?null:context.tusuario.Find(usuario)*/;
+                if (usuario.Rol == null)
                 {
-                    Session.Add("usuario", temporal);
-                    if (temporal.Rol.Equals("admin"))
+                    if (ComprobarUsuario(usuario, temporal))
                     {
-                        return View("~/Views/Libro/InicioLibro.cshtml");
-                    }
-                    else
-                    {
-                        return View("Inicio", rellenarLibros());
+                        Session.Add("usuario", temporal);
+                        if (temporal.Rol.Equals("admin"))
+                        {
+                            return View("~/Views/Libro/InicioLibro.cshtml");
+                        }
+                        else
+                        {
+                            return View("Inicio", rellenarLibros());
 
+                        }
                     }
+                    return Content(Util.mostrarmensaje("Usuario o contraseña erróneos", "Login"));
                 }
-                return Content(Util.mostrarmensaje("Usuario o contraseña erróneos", "Login"));
-            }
-            if (!ComprobarUsuario(usuario, temporal))
-            {
-                return Content(Util.mostrarmensaje("El usuario ya existe", "Login"));
-            }
+                if (!ComprobarUsuario(usuario, temporal))
+                {
+                    return Content(Util.mostrarmensaje("El usuario ya existe", "Login"));
+                }
 
-            try
-            {
-                usuario.CodUsuario = Util.GenerarCodigo(usuario.GetType());
-                control.Insertar(usuario);
-            }
-            catch (Exception e)
-            {
-                return Content(Util.mostrarmensaje(Errores.ControlErrores(e), "Login"));
-            }
-            return Content(Util.mostrarmensaje("Dado de alta correctamente", "Login"));
-        }
+                try
+                {
+                    usuario.CodUsuario = Util.GenerarCodigo(usuario.GetType());
+                    control.Insertar(usuario);
+                }
+                catch (Exception e)
+                {
+                    return Content(Util.mostrarmensaje(Errores.ControlErrores(e), "Login"));
+                }
+                return Content(Util.mostrarmensaje("Dado de alta correctamente", "Login"));
+            } }
         [FiltroUser]
         [HttpPost]
         public ActionResult Detalle(TFactura factura)
@@ -163,7 +162,7 @@ namespace WebApplication1.Controllers
             return obj;
         }
 
-        private bool ComprobarUsuario(TUsuario usuario, TUsuario temporal)
+        private bool ComprobarUsuario(tusuario usuario, tusuario temporal)
         {
 
             if (usuario.Rol == null && temporal != null)
@@ -180,21 +179,19 @@ namespace WebApplication1.Controllers
             return false;
         }
 
-        private List<TLibro> rellenarLibros()
+        private List<tlibro> rellenarLibros()
         {
-            List<TLibro> list = new List<TLibro>();
+            List<tlibro> list = new List<tlibro>();
             try
             {
-
-                foreach (var item in control.Obtener(new TLibro().GetType()))
+                using(libreriavsEntities context=new libreriavsEntities())
                 {
-                    list.Add((TLibro)item);
+                    list = context.tlibro.ToList<tlibro>();
                 }
-
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
             return list;
         }

@@ -213,11 +213,6 @@
     <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\LibroController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\TCliente.cs" />
-    <Compile Include="Controllers\TFactura.cs" />
-    <Compile Include="Controllers\TLibro.cs" />
-    <Compile Include="Controllers\TLineaFactura.cs" />
-    <Compile Include="Controllers\TUsuario.cs" />
     <Compile Include="Entity.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -238,14 +233,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccesoBD.cs" />
-    <Compile Include="Models\AccesoDAO.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\ConexionJDBC.cs" />
-    <Compile Include="Models\IAcceso.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\UtilSQL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="tema.cs">
