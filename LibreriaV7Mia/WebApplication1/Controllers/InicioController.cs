@@ -45,7 +45,9 @@ namespace WebApplication1.Controllers
         {
             using (libreriavsEntities contex = new libreriavsEntities())
             {
-                tusuario temporal = contex.tusuario.Where(o => o.Nick.Equals(usuario.Nick)).First<tusuario>();
+                List<tusuario> listaUsu = contex.tusuario.Where(o => o.Nick.Equals(usuario.Nick)).ToList<tusuario>();
+                tusuario temporal = listaUsu.Count > 0 ? listaUsu.First() : null;
+
                 if (usuario.Rol == null)
                 {
                     if (ComprobarUsuario(usuario, temporal))
@@ -236,7 +238,7 @@ namespace WebApplication1.Controllers
                     {
                         if (!codigo.Equals(""))
                         {
-                            listlibro.Add((tlibro)contex.tlibro.Where<tlibro>(o => o.CodLibro.Equals(codigo)));
+                            listlibro.Add(contex.tlibro.Find(codigo));
                         }
                     }
                 }
@@ -278,7 +280,15 @@ namespace WebApplication1.Controllers
                         lineaFactura.Libro = libro.Titulo;
                         lineaFactura.Cantidad = Convert.ToString(contador);
                         lineaFactura.Total = Convert.ToString(double.Parse(libro.Precio) * contador);
-                        if (!listAux.Contains(lineaFactura))
+
+                        bool bandera = true;
+                        foreach (tlineafactura item in listAux)
+                        {
+                            if (item.Libro.Equals(lineaFactura.Libro))
+                                bandera = false;
+                        }
+                        
+                        if (bandera)
                         {
                             listAux.Add(lineaFactura);
                             //Si inserta un libro repetido dará fallo, así que lo meto en un try catch

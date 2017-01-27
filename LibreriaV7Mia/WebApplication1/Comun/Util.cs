@@ -9,7 +9,7 @@ namespace LibreriaV3._1.Comun
 {
     public static class Util
     {
-        private static string ruta = AppDomain.CurrentDomain.BaseDirectory+"sql.txt";
+        private static string ruta = AppDomain.CurrentDomain.BaseDirectory + "sql.txt";
         private static Dictionary<string, string> SENTENCIAS;
         static BinaryFormatter serializer = new BinaryFormatter();
 
@@ -36,7 +36,7 @@ namespace LibreriaV3._1.Comun
 
         public static void RellenarDictionarySentencias()
         {
-            
+
             if (ComprobarArchivo() && File.ReadAllLines(ruta).Count() > 0)
             {
                 using (var stream = File.OpenRead(ruta))
@@ -54,7 +54,7 @@ namespace LibreriaV3._1.Comun
 
         public static void EscribirDictionarySentenciasFichero()
         {
-            if (ComprobarArchivo()&&SENTENCIAS!=null)
+            if (ComprobarArchivo() && SENTENCIAS != null)
             {
                 using (var stream = File.OpenWrite(ruta))
                 {
@@ -85,19 +85,33 @@ namespace LibreriaV3._1.Comun
             string codigo;
             using (libreriavsEntities contex = new libreriavsEntities())
             {
-                codigo = contex.tlibro.Max(o => o.CodLibro);
+                switch (clase.Name)
+                {
+                    case "tlibro":
+                        codigo = contex.tlibro.Max(o => o.CodLibro);
+                        break;
+                    case "tfactura":
+                        codigo = contex.tfactura.Max(o => o.CodFactura);
+                        break;
+                    case "tusuario":
+                        codigo = contex.tusuario.Max(o => o.CodUsuario);
+                        break;
+                    default:
+                        codigo = "";
+                        break;
+                }
             }
-            if (codigo.Equals(""))
-            {
-                return "cod001";
-            }
-            int indice = int.Parse(codigo.Substring(3)) + 1;
-            if (indice >= 10)
-                return "cod0" + indice;
-            else if (indice >= 100)
-                return "cod" + indice;
-            else
-                return "cod00" + indice;
+                if (codigo.Equals(""))
+                {
+                    return "cod001";
+                }
+                int indice = int.Parse(codigo.Substring(3)) + 1;
+                if (indice >= 10)
+                    return "cod0" + indice;
+                else if (indice >= 100)
+                    return "cod" + indice;
+                else
+                    return "cod00" + indice;
         }
 
         public static string mostrarmensaje(String mensaje, String pagina)

@@ -9,7 +9,7 @@ var total = function (precio) {
     cosa=cosa.replace("Total:","");
     cosa=cosa.replace("€","");
     var totalCarrito = parseFloat(cosa) + parseFloat(precio);
-    document.getElementById("total").innerHTML = "Total:" + totalCarrito.toFixed(2) + "€";
+    document.getElementById("total").innerHTML = "Total:" + extraerDecimales(totalCarrito,2) + "€";
 }
 anadirCarrito = function (titulo, codigo, precio) {
     var nodo = document.createElement("li");
@@ -31,6 +31,11 @@ anadirCarrito = function (titulo, codigo, precio) {
     total(precio);
 }
 
+function extraerDecimales(numero,decimales) {
+    if (!decimales) decimales = 2;
+    var d = Math.pow(10, decimales);
+    return ((numero * d) / d).toFixed(decimales);
+}
 
 function getCookie(name) {
     var cname = name + "=";
