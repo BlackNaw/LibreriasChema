@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="miServicio" elementFormDefault="qualified" targetNamespace="miServicio" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:1640/ServWebWCFConverTemps.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/webservice" />
+  <xs:element name="GetData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="value" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetDataResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDataUsingDataContract">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/webservice" minOccurs="0" name="composite" nillable="true" type="q1:CompositeType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDataUsingDataContractResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/webservice" minOccurs="0" name="GetDataUsingDataContractResult" nillable="true" type="q2:CompositeType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConvCentAFahr">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gCent" type="xs:double" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConvCentAFahrResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ConvCentAFahrResult" type="xs:double" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConvFahrACent">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gFahr" type="xs:double" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConvFahrACentResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ConvFahrACentResult" type="xs:double" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ResultadoDetallado">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="detalle" nillable="true" type="tns:Detalles" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="Detalles">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Grados" type="xs:double" />
+      <xs:element minOccurs="0" name="Literal" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SonCentigrados" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Detalles" nillable="true" type="tns:Detalles" />
+  <xs:element name="ResultadoDetalladoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ResultadoDetalladoResult" nillable="true" type="tns:Detalles" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
