@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Animlaes" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Animlaes;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="AnimlaesConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Animal" Member="Animal">
+    <Type Name="Animal">
+      <Column Name="IdAnimal" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IdFamilia" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Familia_Animal" Member="Familia" ThisKey="IdFamilia" OtherKey="IdFamilia" Type="Familia" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Familia" Member="Familia">
+    <Type Name="Familia">
+      <Column Name="IdFamilia" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Familia_Animal" Member="Animal" ThisKey="IdFamilia" OtherKey="IdFamilia" Type="Animal" />
+    </Type>
+  </Table>
+</Database>

@@ -12,3 +12,17 @@ C:\Users\JAVI\Estudios\Ciclo_DAM\WorkSpaceVS\LibreriaV5\LibreriaV3.1\obj\Debug\L
 C:\Users\JAVI\Estudios\Ciclo_DAM\WorkSpaceVS\LibreriaV5\LibreriaV3.1\obj\Debug\LibreriaV3.1.exe
 C:\Users\JAVI\Estudios\Ciclo_DAM\WorkSpaceVS\LibreriaV5\LibreriaV3.1\obj\Debug\LibreriaV3.1.pdb
 C:\Users\JAVI\Estudios\Ciclo_DAM\WorkSpaceVS\LibreriaV5\LibreriaV3.1\obj\Debug\LibreriaV3._1.Vista.Clientes.resources
+C:\Trabajo\GitHub\LibreriasChema\LibreriaV5\LibreriaV3.1\bin\Debug\LibreriaV3.1.exe.config
+C:\Trabajo\GitHub\LibreriasChema\LibreriaV5\LibreriaV3.1\obj\Debug\LibreriaV3.1.exe
+C:\Trabajo\GitHub\LibreriasChema\LibreriaV5\LibreriaV3.1\obj\Debug\LibreriaV3.1.pdb
+C:\Trabajo\GitHub\LibreriasChema\LibreriaV5\LibreriaV3.1\bin\Debug\LibreriaV3.1.exe
+C:\Trabajo\GitHub\LibreriasChema\LibreriaV5\LibreriaV3.1\bin\Debug\LibreriaV3.1.pdb
+C:\Trabajo\GitHub\LibreriasChema\LibreriaV5\LibreriaV3.1\bin\Debug\MySql.Data.dll
+C:\Trabajo\GitHub\LibreriasChema\LibreriaV5\LibreriaV3.1\obj\Debug\LibreriaV3.1.csprojResolveAssemblyReference.cache
+C:\Trabajo\GitHub\LibreriasChema\LibreriaV5\LibreriaV3.1\obj\Debug\LibreriaV3._1.Vista.Clientes.resources
+C:\Trabajo\GitHub\LibreriasChema\LibreriaV5\LibreriaV3.1\obj\Debug\LibreriaV3._1.Vista.ConsultarFacturas.resources
+C:\Trabajo\GitHub\LibreriasChema\LibreriaV5\LibreriaV3.1\obj\Debug\LibreriaV3._1.Vista.InsertarFacturas.resources
+C:\Trabajo\GitHub\LibreriasChema\LibreriaV5\LibreriaV3.1\obj\Debug\LibreriaV3._1.Libro.resources
+C:\Trabajo\GitHub\LibreriasChema\LibreriaV5\LibreriaV3.1\obj\Debug\LibreriaV3._1.Properties.Resources.resources
+C:\Trabajo\GitHub\LibreriasChema\LibreriaV5\LibreriaV3.1\obj\Debug\LibreriaV3._1.Vista.Principal.resources
+C:\Trabajo\GitHub\LibreriasChema\LibreriaV5\LibreriaV3.1\obj\Debug\LibreriaV3.1.csproj.GenerateResource.Cache

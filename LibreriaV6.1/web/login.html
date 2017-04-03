@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Sign up and login form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../css/styleLogin.css">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="backbox">
+        <div class="loginMsg">
+            <div class="textcontent">
+                <p class="title">¿No tiene una cuenta?</p>
+                <p>Regístrese.</p>
+                <button id="switch1"><a href="login.html">Registrar</a></button>
+            </div>
+        </div>
+        <div class="signupMsg visibility">
+            <div class="textcontent">
+                <p class="title">¿Tiene una cuenta?</p>
+                <p>Inicia sesión</p>
+                <button id="switch2"><a href="login.html">Iniciar sesión</a></button>
+            </div>
+        </div>
+    </div>
+    <!-- backbox -->
+    <form action="/ServletLogin" method="post">
+        <div class="frontbox">
+
+            <div class="login">
+                <h2>Iniciar sesión</h2>
+                <div class="inputbox">
+                    <input type="text" name="username" placeholder="  NOMBRE">
+                    <input type="password" name="password" placeholder="  CONTRASEÑA">
+                </div>
+                <p>¿Has olvidado la contraseña?</p>
+                <button name="boton" value="iniciar">Iniciar sesión</button>
+            </div>
+
+            <div class="signup hide">
+                <h2>Registrar</h2>
+                <div class="inputbox">
+                    <input type="text" name="usernamer" placeholder="  USUARIO">
+                    <input type="password" name="passwordr" placeholder="  CONTRASEÑA">
+                    <select name="rol" class="feedback-input" id="rol">
+                        <option value="admin">Administrador</option>
+                        <option value="user">Usuario</option>
+                    </select>
+                </div>
+                <button name="boton" value="registrar">Registrar</a></button>
+            </div>
+
+        </div>
+    </form>
+    <!-- frontbox -->
+</div>
+
+
+<script src="../js/login.js"></script>
+
+</body>
+</html>
